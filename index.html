@@ -1,81 +1,1322 @@
-    <!-- ═══ NOVO PROJETO: JETPACK COMPOSE ═══ -->
-    <section id="compose-project" class="section">
-      <div class="section-label">New Stack · 2025</div>
-      <h2 class="section-title">Finance Tracker<br><span class="hl">Jetpack Compose Edition</span></h2>
-      <p class="section-sub">
-        Este projeto foi desenvolvido como <strong>Trabalho Final da Disciplina de Pós-Graduação</strong>. O objetivo principal foi implementar uma interface totalmente reativa utilizando a stack moderna do Android, focando em gerenciamento de estado e arquitetura MVVM.
-      </p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rogério Bianchini — Livro Caixa · Jetpack Compose</title>
+<meta name="description" content="Portfólio técnico — Gestor Financeiro Android nativo com Jetpack Compose, Kotlin, UDF/MVVM, i18n dinâmico e design system próprio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #07090f;
+    --bg1:       #0d1017;
+    --bg2:       #131824;
+    --bg3:       #1a2133;
+    --border:    #1e2d45;
+    --border2:   #243450;
+    --accent:    #10b981;
+    --accent2:   #059669;
+    --accent-dim:#0d9e6e22;
+    --blue:      #3b82f6;
+    --blue-dim:  #3b82f612;
+    --orange:    #f59e0b;
+    --red:       #ef4444;
+    --purple:    #a78bfa;
+    --text:      #e2e8f0;
+    --text2:     #94a3b8;
+    --text3:     #5a7196;
+    --mono:      'IBM Plex Mono', monospace;
+    --sans:      'IBM Plex Sans', sans-serif;
+    --radius:    6px;
+  }
 
-      <div class="auth-flow" style="margin-top:32px;">
-        <!-- Card de Arquitetura -->
-        <div class="auth-panel">
-          <div class="auth-panel-header">
-            <div class="auth-panel-icon green">🏗️</div>
-            <div>
-              <div class="auth-panel-title">Arquitetura Declarativa</div>
-              <div class="auth-panel-sub">Compose · ViewModel · State Hoisting</div>
-            </div>
-          </div>
-          <div class="auth-panel-body">
-            <div class="seq-steps">
-              <div class="seq-step">
-                <div class="seq-num accent">1</div>
-                <div class="seq-content">
-                  <div class="seq-title">Unidirectional Data Flow (UDF)</div>
-                  <div class="seq-desc">O estado flui para baixo e os eventos fluem para cima, garantindo que a UI seja uma função direta do estado do ViewModel.</div>
-                </div>
-              </div>
-              <div class="seq-step">
-                <div class="seq-num accent">2</div>
-                <div class="seq-content">
-                  <div class="seq-title">Interoperabilidade XML</div>
-                  <div class="seq-desc">Utilizei <code>AndroidView</code> para integrar componentes legados dentro do ecossistema Compose, demonstrando flexibilidade técnica para migrações de sistemas complexos.</div>
-                </div>
-              </div>
-            </div>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 15px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  .shell { display: flex; min-height: 100vh; }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: sticky; width: 240px; top: 0; flex-shrink: 0;
+    height: 100vh; background: var(--bg1); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; padding: 28px 0 24px;
+    z-index: 100; overflow-y: auto;
+  }
+  .sidebar-brand { padding: 0 24px 28px; border-bottom: 1px solid var(--border); }
+  .brand-label { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+  .brand-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .brand-role { font-size: 11px; color: var(--text3); margin-top: 3px; font-family: var(--mono); }
+  .sidebar-nav { padding: 20px 0; flex: 1; }
+  .nav-section { padding: 0 16px; margin-bottom: 6px; }
+  .nav-section-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); padding: 10px 8px 6px; display: block; }
+  .nav-link { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: var(--radius); font-size: 12.5px; color: var(--text2); text-decoration: none; transition: all .15s; font-weight: 400; }
+  .nav-link:hover { background: var(--bg2); color: var(--text); }
+  .nav-link.active { background: var(--accent-dim); color: var(--accent); }
+  .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--border2); flex-shrink: 0; transition: background .15s; }
+  .nav-link.active .nav-dot { background: var(--accent); }
+  .nav-link:hover .nav-dot { background: var(--text3); }
+  .sidebar-footer { padding: 16px 24px 0; border-top: 1px solid var(--border); }
+  .badge-row { display: flex; flex-direction: column; gap: 5px; }
+  .sbadge { font-family: var(--mono); font-size: 9.5px; padding: 3px 8px; border-radius: 3px; border: 1px solid var(--border2); color: var(--text3); display: inline-block; }
+  .sbadge.green { border-color: #10b98130; color: var(--accent); background: var(--accent-dim); }
+  .sbadge.purple { border-color: #a78bfa30; color: var(--purple); background: #a78bfa10; }
+
+  /* ─── MAIN ─── */
+  main { flex: 1; min-width: 0; min-height: 100vh; overflow-x: hidden; }
+
+  /* ─── TOPBAR ─── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50; background: var(--bg1);
+    border-bottom: 1px solid var(--border); padding: 0 48px; height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(8px);
+  }
+  .topbar-path { font-family: var(--mono); font-size: 11.5px; color: var(--text3); display: flex; align-items: center; gap: 8px; }
+  .topbar-path span { color: var(--text2); }
+  .topbar-path .sep { color: var(--border2); }
+  .topbar-meta { display: flex; align-items: center; gap: 16px; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 8px var(--accent)}50%{opacity:.5;box-shadow:0 0 3px var(--accent)} }
+  .topbar-tag { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .05em; }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 72px 48px; border-bottom: 1px solid var(--border); }
+  .section-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--accent-dim); max-width: 60px; }
+  .section-title { font-size: 28px; font-weight: 600; color: var(--text); line-height: 1.25; margin-bottom: 10px; letter-spacing: -.02em; }
+  .section-sub { font-size: 14px; color: var(--text2); max-width: 680px; line-height: 1.7; }
+
+  /* ─── HERO ─── */
+  #hero {
+    padding: 80px 48px 72px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse 900px 400px at 60% 50%, #4c1d9508 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px,transparent 1px), linear-gradient(90deg,var(--border) 1px,transparent 1px);
+    background-size: 40px 40px; opacity: .2;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+  }
+  .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--purple); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .hero-tag::before { content: '//'; opacity: .5; }
+  .hero-title { font-size: 44px; font-weight: 600; line-height: 1.12; letter-spacing: -.035em; color: var(--text); max-width: 700px; margin-bottom: 18px; }
+  .hero-title .hl { color: var(--accent); }
+  .hero-title .hl2 { color: var(--purple); }
+  .hero-desc { font-size: 15px; color: var(--text2); max-width: 580px; line-height: 1.75; margin-bottom: 36px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { font-family: var(--mono); font-size: 12px; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); text-decoration: none; transition: all .18s; border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; letter-spacing: .02em; }
+  .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-ghost { background: transparent; color: var(--text2); border-color: var(--border2); }
+  .btn-ghost:hover { border-color: var(--text3); color: var(--text); background: var(--bg2); }
+  .btn-purple { background: #a78bfa20; color: var(--purple); border-color: #a78bfa40; }
+  .btn-purple:hover { background: #a78bfa30; }
+
+  /* ─── IDENTITY CARD ─── */
+  .identity-card { display: flex; flex-wrap: wrap; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 32px; }
+  .identity-field { background: var(--bg1); padding: 16px 22px; flex: 1 1 200px; }
+  .ifield-label { font-family: var(--mono); font-size: 9.5px; color: var(--text3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+  .ifield-value { font-size: 13px; color: var(--text); font-weight: 500; }
+  .ifield-value.mono { font-family: var(--mono); font-size: 12px; }
+
+  /* ─── METRICS ─── */
+  .metrics-row { display: flex; flex-wrap: wrap; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 32px; }
+  .metric { background: var(--bg1); padding: 22px; text-align: center; flex: 1 1 120px; }
+  .metric-val { font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--accent); display: block; line-height: 1; margin-bottom: 6px; }
+  .metric-val.purple { color: var(--purple); }
+  .metric-val.orange { color: var(--orange); }
+  .metric-label { font-size: 11px; color: var(--text3); line-height: 1.4; }
+
+  /* ─── RUBRIC TABLE ─── */
+  .rubric-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 12.5px; }
+  .rubric-table thead tr { border-bottom: 1px solid var(--border2); }
+  .rubric-table th { padding: 10px 14px; text-align: left; font-family: var(--mono); font-size: 9.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); }
+  .rubric-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .rubric-table tr:last-child td { border-bottom: none; }
+  .rubric-table tbody tr:hover td { background: var(--bg2); }
+  .score { font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; display: inline-block; white-space: nowrap; }
+  .score.full { color: var(--accent); background: var(--accent-dim); border: 1px solid #10b98130; }
+  .score.medium { color: var(--orange); background: #f59e0b10; border: 1px solid #f59e0b30; }
+
+  /* ─── CODE BLOCK ─── */
+  .code-block { background: #050709; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 16px 0; }
+  .code-header { padding: 10px 16px; background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .code-lang { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .05em; }
+  .code-dots { display: flex; gap: 5px; }
+  .code-dots span { width: 9px; height: 9px; border-radius: 50%; }
+  .code-dots span:nth-child(1) { background: #ef4444; }
+  .code-dots span:nth-child(2) { background: #f59e0b; }
+  .code-dots span:nth-child(3) { background: #10b981; }
+  pre { padding: 18px 20px; font-family: var(--mono); font-size: 12px; line-height: 1.75; overflow-x: auto; color: #a8b5cc; }
+  .kw { color: #79b8ff; }
+  .str { color: #9ecbff; }
+  .fn { color: #b3d9ff; }
+  .cm { color: #3a5069; }
+  .ann { color: #c9a96e; }
+  .num { color: #79b8ff; }
+  .type { color: #88d8b0; }
+  .acc { color: var(--accent); }
+  .prp { color: var(--purple); }
+  .xml-tag { color: #79b8ff; }
+  .xml-attr { color: #c9a96e; }
+  .xml-val { color: #9ecbff; }
+
+  /* ─── TECH GRID ─── */
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 32px; }
+  .tech-cell { background: var(--bg1); padding: 22px; transition: background .15s; flex: 1 1 200px; }
+  .tech-cell:hover { background: var(--bg2); }
+  .tech-cell-icon { font-size: 18px; margin-bottom: 10px; }
+  .tech-cell-name { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .tech-cell-role { font-size: 11px; color: var(--text3); line-height: 1.55; }
+  .tech-cell-tag { font-family: var(--mono); font-size: 9px; color: var(--accent); background: var(--accent-dim); padding: 2px 7px; border-radius: 3px; display: inline-block; margin-top: 8px; letter-spacing: .05em; }
+  .tech-cell-tag.purple { color: var(--purple); background: #a78bfa10; }
+
+  /* ─── CALLOUT ─── */
+  .callout { border-left: 3px solid var(--accent); padding: 14px 18px; background: var(--accent-dim); border-radius: 0 6px 6px 0; margin: 20px 0; font-size: 12.5px; color: var(--text2); line-height: 1.6; }
+  .callout strong { color: var(--accent); font-weight: 600; }
+  .callout-warn { border-left-color: var(--orange); background: #f59e0b0d; }
+  .callout-warn strong { color: var(--orange); }
+  .callout-purple { border-left-color: var(--purple); background: #a78bfa0d; }
+  .callout-purple strong { color: var(--purple); }
+  .callout-info { border-left-color: var(--blue); background: var(--blue-dim); }
+  .callout-info strong { color: var(--blue); }
+
+  /* ─── FEATURE CARDS ─── */
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .feature-card { background: var(--bg1); border: 1px solid var(--border); border-radius: 10px; padding: 22px; transition: border-color .15s; }
+  .feature-card:hover { border-color: var(--border2); }
+  .feature-card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .feat-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .feat-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .feat-sub { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 2px; }
+  .feat-body { font-size: 12px; color: var(--text2); line-height: 1.65; }
+
+  /* ─── XML COMPARISON ─── */
+  .xml-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+  .xml-panel { background: var(--bg1); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .xml-panel-header { padding: 12px 18px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+  .xml-panel-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+  .xml-panel-label.red { color: var(--red); }
+  .xml-panel-label.green { color: var(--accent); }
+  .xml-panel-desc { font-size: 11px; color: var(--text3); margin-top: 3px; }
+  .xml-panel-body { padding: 16px 18px; font-size: 12px; color: var(--text2); line-height: 1.7; }
+
+  /* ─── COLOR SWATCHES ─── */
+  .color-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .swatch { border-radius: 10px; padding: 20px 16px; text-align: center; min-width: 140px; flex: 1 1 140px; }
+  .swatch-hex { font-family: var(--mono); font-size: 10px; margin-bottom: 4px; }
+  .swatch-name { font-size: 11px; font-weight: 600; margin-bottom: 3px; }
+  .swatch-use { font-size: 10px; opacity: .8; }
+
+  /* ─── SEQ STEPS ─── */
+  .seq-steps { display: flex; flex-direction: column; gap: 0; }
+  .seq-step { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .seq-step:last-child { border-bottom: none; }
+  .seq-num { width: 22px; height: 22px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 9px; color: var(--text3); font-weight: 600; flex-shrink: 0; margin-top: 2px; }
+  .seq-num.accent { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+  .seq-num.purple { background: #a78bfa10; border-color: #a78bfa40; color: var(--purple); }
+  .seq-title { font-size: 12.5px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .seq-desc { font-size: 11px; color: var(--text3); line-height: 1.5; }
+  .seq-code { font-family: var(--mono); font-size: 10px; color: var(--accent); background: var(--accent-dim); padding: 1px 5px; border-radius: 3px; margin-top: 4px; display: inline-block; }
+  .seq-code.purple { color: var(--purple); background: #a78bfa10; }
+
+  /* ─── FOOTER ─── */
+  footer { padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+  .footer-info { font-family: var(--mono); font-size: 11px; color: var(--text3); line-height: 1.7; }
+  .footer-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fbadge { font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border2); color: var(--text3); }
+
+  /* ─── FADE IN ─── */
+  .fade-in { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+  .fade-in:nth-child(2) { transition-delay: .08s; }
+  .fade-in:nth-child(3) { transition-delay: .16s; }
+  .fade-in:nth-child(4) { transition-delay: .24s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
+    .shell { flex-direction: column; }
+    .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+    .section { padding: 48px 24px; }
+    #hero { padding: 48px 24px; }
+    .hero-title { font-size: 28px; }
+    .topbar { padding: 0 24px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .xml-compare { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; align-items: flex-start; }
+  }
+
+  code {
+    font-family: var(--mono); font-size: 11.5px; color: var(--accent);
+    background: var(--accent-dim); padding: 1px 6px; border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-label">Portfolio · 2025–26</div>
+    <div class="brand-name">Rogério C. Bianchini</div>
+    <div class="brand-role">Mobile Systems · Android</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <span class="nav-section-label">Projeto</span>
+      <a href="#overview" class="nav-link active"><span class="nav-dot"></span>Overview</a>
+      <a href="#assignment" class="nav-link"><span class="nav-dot"></span>Enunciado UTFPR</a>
+      <a href="#beyond" class="nav-link"><span class="nav-dot"></span>Além do Enunciado</a>
+    </div>
+    <div class="nav-section">
+      <span class="nav-section-label">Engenharia</span>
+      <a href="#xml-in-compose" class="nav-link"><span class="nav-dot"></span>XML no Compose</a>
+      <a href="#architecture" class="nav-link"><span class="nav-dot"></span>Arquitetura UDF</a>
+      <a href="#implementation" class="nav-link"><span class="nav-dot"></span>Implementação</a>
+    </div>
+    <div class="nav-section">
+      <span class="nav-section-label">Design & Stack</span>
+      <a href="#design" class="nav-link"><span class="nav-dot"></span>Design System</a>
+      <a href="#stack" class="nav-link"><span class="nav-dot"></span>Tech Stack</a>
+      <a href="#compat" class="nav-link"><span class="nav-dot"></span>Compatibilidade</a>
+      <a href="#contact" class="nav-link"><span class="nav-dot"></span>Contato</a>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="badge-row">
+      <span class="sbadge green">● Jetpack Compose</span>
+      <span class="sbadge purple">◆ UTFPR · 2026</span>
+      <span class="sbadge">Android API 26+</span>
+      <span class="sbadge">Kotlin 2.2 · Material 3</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<main>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-path">
+      <span>bianchini.dev</span>
+      <span class="sep">/</span>
+      <span>projects</span>
+      <span class="sep">/</span>
+      <span>livro-caixa</span>
+    </div>
+    <div class="topbar-meta">
+      <span class="topbar-tag">UTFPR · Pós-Graduação · 2026</span>
+      <div class="status-dot"></div>
+      <span class="topbar-tag">v2.0 · Compose</span>
+    </div>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="overview" style="padding:80px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);background:radial-gradient(ellipse 900px 400px at 60% 50%,#4c1d9510 0%,transparent 70%);">
+    <div class="hero-grid"></div>
+
+    <div class="hero-tag">Android Native · Jetpack Compose · Kotlin · Material 3 · i18n</div>
+
+    <h1 class="hero-title">
+      Livro Caixa —<br>
+      <span class="hl2">Gestor</span> <span class="hl">Financeiro</span>
+    </h1>
+
+    <p class="hero-desc">
+      Aplicativo Android nativo de gestão financeira pessoal, desenvolvido integralmente em
+      Jetpack Compose com padrão UDF/MVVM. Originado como trabalho final da disciplina de
+      <em>Interfaces Gráficas em Aplicações para Dispositivos Móveis</em> na
+      UTFPR — e evoluído para um produto com padrão de mercado, com design system próprio,
+      internacionalização dinâmica PT-BR / EN-US e arquitetura limpa.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#assignment" class="btn btn-primary">↓ Ver Enunciado</a>
+      <a href="#xml-in-compose" class="btn btn-purple">XML no Compose →</a>
+      <a href="#stack" class="btn btn-ghost">Tech Stack →</a>
+    </div>
+
+    <div class="identity-card" style="max-width:820px;">
+      <div class="identity-field">
+        <div class="ifield-label">Aluno</div>
+        <div class="ifield-value">Rogério Corrêa Bianchini</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Instituição</div>
+        <div class="ifield-value">UTFPR — Universidade Tecnológica Federal do Paraná</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Curso</div>
+        <div class="ifield-value">Especialização em Programação para Dispositivos Móveis</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Disciplina</div>
+        <div class="ifield-value">Interfaces Gráficas em Aplicações para Dispositivos Móveis</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Prazo de Entrega</div>
+        <div class="ifield-value mono">12/04/2026</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Modalidade</div>
+        <div class="ifield-value">Individual</div>
+      </div>
+    </div>
+
+    <div class="metrics-row" style="max-width:820px;">
+      <div class="metric">
+        <span class="metric-val">10,0</span>
+        <div class="metric-label">Pontuação total<br>da rubrica</div>
+      </div>
+      <div class="metric">
+        <span class="metric-val purple">8</span>
+        <div class="metric-label">Itens da<br>especificação</div>
+      </div>
+      <div class="metric">
+        <span class="metric-val orange">2</span>
+        <div class="metric-label">Idiomas<br>PT-BR · EN-US</div>
+      </div>
+      <div class="metric">
+        <span class="metric-val">API 26</span>
+        <div class="metric-label">Min. Android SDK<br>Android 8.0+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ASSIGNMENT ═══ -->
+  <section id="assignment" class="section">
+    <div class="section-label">Enunciado Oficial</div>
+    <h2 class="section-title">O que a UTFPR pediu</h2>
+    <p class="section-sub">
+      A disciplina forneceu uma aplicação base chamada <strong>TrabalhoFinal</strong> — um gerenciador de
+      lançamentos financeiros a pagar e a receber — e solicitou alterações específicas de UI para melhorar
+      a experiência do usuário utilizando Jetpack Compose.
+    </p>
+
+    <div class="callout-purple callout" style="margin-top:28px;">
+      <strong>Objetivo da disciplina:</strong> Avaliar a capacidade dos acadêmicos em criar e manipular
+      Interfaces Gráficas utilizando o Jetpack Compose.
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;color:var(--text);margin:32px 0 16px;">Parte 1 — Listagem de Lançamentos</h3>
+
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Requisito</th>
+          <th>Peso</th>
+          <th>Especificação Técnica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">1.1</td>
+          <td style="color:var(--text2);font-size:12px;">Ícone alinhado à esquerda em cada item da lista, indicando se foi pago ou não, com cor diferente por tipo de lançamento</td>
+          <td><span class="score full">1,5</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;line-height:1.6;">
+            ThumbUp = pago · ThumbDownOffAlt = não pago<br>
+            Color(0xFFCF5355) = despesa · Color(0xFF00984E) = receita
+          </td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">1.2</td>
+          <td style="color:var(--text2);font-size:12px;">Primeira linha apenas para a descrição; data e valor na segunda linha — data à esquerda, valor à direita</td>
+          <td><span class="score medium">0,5</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">Row com SpaceBetween na segunda linha</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">1.3</td>
+          <td style="color:var(--text2);font-size:12px;">Formatar valor com <code>formatar()</code>; despesas com sinal negativo; cor do valor igual à cor do ícone</td>
+          <td><span class="score full">1,0</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">NumberFormat pt-BR · prefix "-" condicional</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">1.4</td>
+          <td style="color:var(--text2);font-size:12px;">BottomBar: saldo e previsão com mesma regra visual (cor por tipo + sinal negativo para despesas)</td>
+          <td><span class="score full">1,5</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">ColorIncome / ColorExpense + prefixo "-"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:15px;font-weight:600;color:var(--text);margin:32px 0 16px;">Parte 2 — Formulário de Cadastro / Edição</h3>
+
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Requisito</th>
+          <th>Peso</th>
+          <th>Especificação Técnica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">2.1</td>
+          <td style="color:var(--text2);font-size:12px;">Ícones à esquerda dos campos Descrição e Valor</td>
+          <td><span class="score full">1,0</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">
+            AutoMirrored.Filled.Notes · AttachMoney<br>
+            Alinhamento entre campos mantido via FormFieldRow
+          </td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">2.2</td>
+          <td style="color:var(--text2);font-size:12px;">Campo de data substituído por DatePicker</td>
+          <td><span class="score full">1,5</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">DatePickerDialog via android.app · componente DatePickerField reutilizável</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">2.3</td>
+          <td style="color:var(--text2);font-size:12px;">Confirmação obrigatória antes de excluir registro</td>
+          <td><span class="score full">1,5</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">AlertDialog via ConfirmationDialog · estado showDeleteDialog</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">2.4</td>
+          <td style="color:var(--text2);font-size:12px;">Validação obrigatória do campo Valor + proteção contra crash com entrada inválida</td>
+          <td><span class="score full">1,5</span></td>
+          <td style="color:var(--text3);font-family:var(--mono);font-size:10.5px;">Regex <code>^\d*\.?\d*$</code> · amountError state · toDoubleOrNull() guard</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>Total da rubrica: 10,0 pontos.</strong> Todos os oito itens foram implementados e entregues,
+      com validações extras e proteção contra crash na entrada do campo valor além do mínimo exigido.
+    </div>
+  </section>
+
+  <!-- ═══ BEYOND ═══ -->
+  <section id="beyond" class="section">
+    <div class="section-label">Além do Enunciado</div>
+    <h2 class="section-title">Do trabalho acadêmico ao padrão de mercado</h2>
+    <p class="section-sub">
+      Encarei o enunciado não como um checklist a cumprir, mas como ponto de partida para entregar um
+      produto que eu me orgulharia de colocar em produção. As decisões abaixo não foram exigidas —
+      foram deliberadas.
+    </p>
+
+    <div class="feature-grid" style="margin-top:32px;">
+      <div class="feature-card fade-in">
+        <div class="feature-card-header">
+          <div class="feat-icon" style="background:#a78bfa15;">🌐</div>
+          <div>
+            <div class="feat-title">Internacionalização Dinâmica (i18n)</div>
+            <div class="feat-sub">PT-BR · EN-US · Runtime Locale Switching</div>
           </div>
         </div>
+        <div class="feat-body">
+          O enunciado não pedia múltiplos idiomas. Implementei suporte completo PT-BR / EN-US com troca
+          em tempo de execução via <code>AppCompatDelegate.setApplicationLocales()</code>, sem reiniciar o app.
+          Nenhum texto está hardcoded — 100% via <code>stringResource()</code>.
+        </div>
+      </div>
 
-        <!-- Card de Design System -->
-        <div class="auth-panel">
-          <div class="auth-panel-header">
-            <div class="auth-panel-icon blue">🎨</div>
-            <div>
-              <div class="auth-panel-title">Design System & Colors</div>
-              <div class="auth-panel-sub">Material 3 · Custom Theme</div>
-            </div>
+      <div class="feature-card fade-in">
+        <div class="feature-card-header">
+          <div class="feat-icon" style="background:#10b98115;">📐</div>
+          <div>
+            <div class="feat-title">Clean Architecture · UDF</div>
+            <div class="feat-sub">MVVM · StateFlow · State Down / Events Up</div>
           </div>
-          <div class="auth-panel-body">
-            <p style="font-size:12px; color:var(--text2); margin-bottom:10px;">
-              A escolha das cores seguiu uma paleta <strong>Teal & Dark Grey</strong>:
-            </p>
-            <ul style="font-size:11px; color:var(--text3); list-style:none;">
-              <li><strong style="color:var(--accent);">● Teal (#10b981):</strong> Utilizado para sinalizar sucesso, liquidez e fluxos financeiros positivos.</li>
-              <li><strong style="color:var(--text);">● Dark Background:</strong> Reduz a fadiga visual e destaca os dados numéricos das transações.</li>
-              <li><strong>● Typography:</strong> IBM Plex Mono para valores, reforçando o aspecto técnico/contábil.</li>
-            </ul>
+        </div>
+        <div class="feat-body">
+          Refatorei completamente a estrutura para seguir UDF (Unidirectional Data Flow). Nenhum
+          <code>@Composable</code> gerencia lógica de negócio. Todo estado flui do
+          <code>TransactionViewModel</code> via <code>StateFlow</code>; a UI só emite eventos de volta.
+        </div>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-header">
+          <div class="feat-icon" style="background:#3b82f615;">🇧🇷</div>
+          <div>
+            <div class="feat-title">Regra de Ouro da Moeda</div>
+            <div class="feat-sub">Sempre R$ · Locale pt-BR fixo</div>
+          </div>
+        </div>
+        <div class="feat-body">
+          Independente do idioma selecionado, a formatação financeira é sempre Real Brasileiro:
+          separador de milhar com ponto, decimal com vírgula, símbolo R$.
+          Implementado via <code>NumberFormat.getCurrencyInstance(Locale("pt", "BR"))</code> fixo.
+        </div>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-header">
+          <div class="feat-icon" style="background:#f59e0b15;">🔤</div>
+          <div>
+            <div class="feat-title">Nomenclatura 100% em Inglês</div>
+            <div class="feat-sub">Clean Code · Padrão de Mercado</div>
+          </div>
+        </div>
+        <div class="feat-body">
+          O enunciado entregava código misto: <code>Lancamento</code>, <code>dataPrevisao</code>,
+          <code>salvar()</code>. Renomeei tudo: <code>Transaction</code>, <code>dueDate</code>,
+          <code>save()</code>. Português vive exclusivamente nos arquivos <code>strings.xml</code>.
+        </div>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-header">
+          <div class="feat-icon" style="background:#10b98115;">🎨</div>
+          <div>
+            <div class="feat-title">Design System Dark Premium</div>
+            <div class="feat-sub">Gradiente · Tipografia ampliada · Alto contraste</div>
+          </div>
+        </div>
+        <div class="feat-body">
+          Fundo com <code>Brush.verticalGradient</code> (DarkBlue → Purple). Tipografia 16sp+ em textos
+          base, 24sp+ em títulos. Nenhum ícone ou texto principal em preto — uso de
+          <code>Color.White</code> e cores de alto contraste em todo o sistema.
+        </div>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-header">
+          <div class="feat-icon" style="background:#a78bfa15;">📅</div>
+          <div>
+            <div class="feat-title">Modelo de Previsão vs. Realização</div>
+            <div class="feat-sub">dueDate · paymentDate · isCompleted</div>
+          </div>
+        </div>
+        <div class="feat-body">
+          Além do simples checkbox "pago", implementei o modelo duplo: <code>dueDate</code>
+          (vencimento previsto) e <code>paymentDate</code> (data de realização). O botão animado
+          "Marcar como Concluído" abre um <code>DatePickerDialog</code> para registrar a data exata
+          do movimento financeiro.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ XML IN COMPOSE ═══ -->
+  <section id="xml-in-compose" class="section">
+    <div class="section-label">Decisão Técnica</div>
+    <h2 class="section-title">Por que utilizei XML em um projeto Compose?</h2>
+    <p class="section-sub">
+      Jetpack Compose <strong>substitui</strong> os arquivos XML de layout (<code>activity_main.xml</code>,
+      <code>fragment_list.xml</code>). Mas a plataforma Android ainda usa XML em camadas que
+      <em>o Compose não alcança</em> — e entender essa distinção é o que separa um desenvolvedor Android
+      de um desenvolvedor que apenas usa o Compose.
+    </p>
+
+    <div class="callout-purple callout" style="margin-top:24px;">
+      <strong>Regra de ouro:</strong> Compose substitui XML de <em>layout de UI</em>. Não substitui o
+      sistema de recursos da plataforma Android, que continua sendo declarado em XML e consumido pelo
+      runtime do Android antes mesmo do Compose ser inicializado.
+    </div>
+
+    <div class="xml-compare" style="margin-top:32px;">
+      <div class="xml-panel">
+        <div class="xml-panel-header">
+          <div class="xml-panel-label red">✗ XML que SUBSTITUÍ com Compose</div>
+          <div class="xml-panel-desc">Layouts de interface — eliminados completamente</div>
+        </div>
+        <div class="xml-panel-body">
+          <div class="seq-steps">
+            <div class="seq-step">
+              <div class="seq-num" style="color:var(--red);border-color:#ef444430;background:#ef444410;">✗</div>
+              <div>
+                <div class="seq-title"><code>res/layout/activity_main.xml</code></div>
+                <div class="seq-desc">Definição de UI declarativa — substituído por <code>@Composable</code> functions. O app não tem nenhum arquivo de layout XML.</div>
+              </div>
+            </div>
+            <div class="seq-step">
+              <div class="seq-num" style="color:var(--red);border-color:#ef444430;background:#ef444410;">✗</div>
+              <div>
+                <div class="seq-title"><code>res/layout/fragment_list.xml</code></div>
+                <div class="seq-desc">Fragments com XML — substituídos por <code>TransactionListScreen</code>, <code>TransactionFormScreen</code> como Composables stateless.</div>
+              </div>
+            </div>
+            <div class="seq-step" style="border:none;">
+              <div class="seq-num" style="color:var(--red);border-color:#ef444430;background:#ef444410;">✗</div>
+              <div>
+                <div class="seq-title"><code>RecyclerView + Adapter XML</code></div>
+                <div class="seq-desc">Substituído por <code>LazyColumn { items(...) { TransactionListItem() } }</code> — sem adapter, sem ViewHolder, sem DiffUtil manual.</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Code Snippet do MainActivity -->
-      <div class="code-block" style="margin-top:28px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Kotlin · MainActivity.kt</span>
+      <div class="xml-panel">
+        <div class="xml-panel-header">
+          <div class="xml-panel-label green">✓ XML que MANTIVE (plataforma Android)</div>
+          <div class="xml-panel-desc">Recursos de sistema — Compose os consome, não os substitui</div>
         </div>
-        <pre><span class="ann">@Composable</span>
-<span class="kw">fun</span> <span class="fn">MainApp</span>(viewModel: <span class="type">TransactionViewModel</span> = viewModel()) {
-    <span class="kw">var</span> screenState <span class="kw">by</span> remember { mutableStateOf&lt;<span class="type">Screen</span>&gt;(<span class="type">Screen.List</span>) }
-    
-    <span class="kw">when</span> (screenState) {
-        <span class="kw">is</span> <span class="type">Screen.List</span> -> <span class="fn">TransactionListScreen</span>(onNew = { screenState = <span class="type">Screen.Form</span> })
-        <span class="kw">is</span> <span class="type">Screen.Form</span> -> <span class="fn">TransactionFormScreen</span>(onBack = { screenState = <span class="type">Screen.List</span> })
+        <div class="xml-panel-body">
+          <div class="seq-steps">
+            <div class="seq-step">
+              <div class="seq-num accent">✓</div>
+              <div>
+                <div class="seq-title"><code>res/values/strings.xml</code></div>
+                <div class="seq-desc">Sistema de recursos de strings do Android. Obrigatório para i18n com qualificadores de locale (<code>values-en/</code>). Compose acessa via <code>stringResource(R.string.x)</code>.</div>
+                <span class="seq-code">stringResource(R.string.save)</span>
+              </div>
+            </div>
+            <div class="seq-step">
+              <div class="seq-num accent">✓</div>
+              <div>
+                <div class="seq-title"><code>res/xml/locales_config.xml</code></div>
+                <div class="seq-desc">Exigido desde Android 13 (API 33) para o atributo <code>android:localeConfig</code> no Manifest. Sem ele, <code>AppCompatDelegate.setApplicationLocales()</code> não funciona corretamente. Não existe API Kotlin/Compose equivalente.</div>
+                <span class="seq-code">android:localeConfig="@xml/locales_config"</span>
+              </div>
+            </div>
+            <div class="seq-step">
+              <div class="seq-num accent">✓</div>
+              <div>
+                <div class="seq-title"><code>AndroidManifest.xml</code></div>
+                <div class="seq-desc">Contrato da aplicação com o sistema operacional Android. Define Activity, permissões, ícone, tema, suporte a RTL e configuração de locale. É um requisito da plataforma — não é UI.</div>
+              </div>
+            </div>
+            <div class="seq-step" style="border:none;">
+              <div class="seq-num accent">✓</div>
+              <div>
+                <div class="seq-title"><code>drawable/ic_launcher_*.xml</code></div>
+                <div class="seq-desc">Adaptive Icons do Android usam vector drawables XML em camadas (background + foreground). O sistema mipmap renderiza o ícone do launcher <em>antes</em> do runtime do Compose inicializar — não há API Compose para isso.</div>
+                <span class="seq-code">&lt;adaptive-icon&gt; → mipmap-anydpi/</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- locales_config.xml -->
+    <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div>
+        <h3 style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;font-family:var(--mono);">locales_config.xml — Sistema de Idiomas</h3>
+        <div class="code-block" style="margin:0;">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <span class="code-lang">res/xml/locales_config.xml</span>
+          </div>
+          <pre><span class="xml-tag">&lt;locale-config</span> <span class="xml-attr">xmlns:android=</span><span class="xml-val">"..."</span><span class="xml-tag">&gt;</span>
+   <span class="xml-tag">&lt;locale</span> <span class="xml-attr">android:name=</span><span class="xml-val">"pt-BR"</span><span class="xml-tag">/&gt;</span>
+   <span class="xml-tag">&lt;locale</span> <span class="xml-attr">android:name=</span><span class="xml-val">"en-US"</span><span class="xml-tag">/&gt;</span>
+<span class="xml-tag">&lt;/locale-config&gt;</span>
+
+<span class="cm">// No Manifest:</span>
+<span class="xml-tag">&lt;application</span>
+    <span class="xml-attr">android:localeConfig=</span><span class="xml-val">"@xml/locales_config"</span>
+    <span class="xml-tag">.../&gt;</span></pre>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;font-family:var(--mono);">Troca de Idioma em Compose</h3>
+        <div class="code-block" style="margin:0;">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <span class="code-lang">Kotlin · SettingsDialog.kt</span>
+          </div>
+          <pre><span class="cm">// Compose chama AppCompat para mudar o locale</span>
+<span class="cm">// sem reiniciar o app (API 33+ nativo)</span>
+<span class="type">SettingsDialog</span>(
+    onLanguageSelected = { tag: <span class="type">String</span> ->
+        AppCompatDelegate
+            .setApplicationLocales(
+                LocaleListCompat
+                    .forLanguageTags(tag)
+            )
+    }
+)
+
+<span class="cm">// Compose lê as strings via:</span>
+<span class="fn">stringResource</span>(R.string.save)
+<span class="cm">// → resolve do values/ ou values-en/</span>
+<span class="cm">//   de acordo com locale ativo</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-info callout" style="margin-top:24px;">
+      <strong>Adaptive Icon XML:</strong> Os arquivos <code>ic_launcher_background.xml</code> e
+      <code>ic_launcher_foreground.xml</code> são vector drawables que representam as camadas do
+      ícone adaptativo (API 26+). O Android OS renderiza o ícone no launcher usando o sistema mipmap —
+      isso acontece <em>fora</em> do processo do app. Não existe API Compose para definir ícones de launcher:
+      a única forma é via XML no sistema de recursos.
+    </div>
+  </section>
+
+  <!-- ═══ ARCHITECTURE ═══ -->
+  <section id="architecture" class="section">
+    <div class="section-label">Arquitetura</div>
+    <h2 class="section-title">UDF — Unidirectional Data Flow</h2>
+    <p class="section-sub">
+      A arquitetura segue o padrão recomendado pelo Android para aplicações Compose: estado desce do
+      ViewModel para a UI, eventos sobem da UI de volta para o ViewModel. Nenhum Composable contém
+      lógica de negócio ou acessa dados diretamente.
+    </p>
+
+    <div style="background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:36px;margin-top:32px;">
+      <svg viewBox="0 0 820 340" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" style="width:100%;height:auto;">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#10b981"/>
+          </marker>
+          <marker id="arr-gray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#3a5069"/>
+          </marker>
+          <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#a78bfa"/>
+          </marker>
+        </defs>
+
+        <!-- Data source -->
+        <rect x="20" y="130" width="140" height="80" rx="8" fill="#0d1017" stroke="#1e2d45" stroke-width="1.5"/>
+        <text x="90" y="165" text-anchor="middle" fill="#5a7196" font-size="9" letter-spacing="1.5">DATA</text>
+        <text x="90" y="182" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">MutableStateFlow</text>
+        <text x="90" y="198" text-anchor="middle" fill="#5a7196" font-size="9">List&lt;Transaction&gt;</text>
+
+        <!-- ViewModel -->
+        <rect x="220" y="80" width="180" height="180" rx="8" fill="#0d1017" stroke="#a78bfa40" stroke-width="1.5"/>
+        <text x="310" y="108" text-anchor="middle" fill="#a78bfa" font-size="9" letter-spacing="1.5">VIEWMODEL</text>
+        <rect x="236" y="118" width="148" height="36" rx="5" fill="#1a2133" stroke="#243450"/>
+        <text x="310" y="132" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600">dashboardState</text>
+        <text x="310" y="147" text-anchor="middle" fill="#5a7196" font-size="9">Flow&lt;DashboardState&gt;</text>
+        <rect x="236" y="162" width="148" height="36" rx="5" fill="#1a2133" stroke="#243450"/>
+        <text x="310" y="176" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600">upcomingDue</text>
+        <text x="310" y="191" text-anchor="middle" fill="#5a7196" font-size="9">Flow&lt;List&lt;Transaction&gt;&gt;</text>
+        <rect x="236" y="206" width="68" height="28" rx="4" fill="#131824" stroke="#1e2d45"/>
+        <text x="270" y="224" text-anchor="middle" fill="#10b981" font-size="9">save()</text>
+        <rect x="312" y="206" width="72" height="28" rx="4" fill="#131824" stroke="#1e2d45"/>
+        <text x="348" y="224" text-anchor="middle" fill="#ef4444" font-size="9">delete()</text>
+
+        <!-- UI Layer -->
+        <rect x="460" y="50" width="340" height="240" rx="8" fill="#0d1017" stroke="#1e2d45" stroke-width="1.5"/>
+        <text x="630" y="76" text-anchor="middle" fill="#5a7196" font-size="9" letter-spacing="1.5">COMPOSE UI LAYER</text>
+        <rect x="476" y="90" width="140" height="60" rx="5" fill="#1a2133" stroke="#243450"/>
+        <text x="546" y="115" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600">TransactionListScreen</text>
+        <text x="546" y="132" text-anchor="middle" fill="#5a7196" font-size="8.5">Dashboard · LazyColumn</text>
+        <rect x="626" y="90" width="154" height="60" rx="5" fill="#1a2133" stroke="#243450"/>
+        <text x="703" y="115" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600">TransactionFormScreen</text>
+        <text x="703" y="132" text-anchor="middle" fill="#5a7196" font-size="8.5">Form · Validation · Dialogs</text>
+        <rect x="476" y="164" width="100" height="48" rx="5" fill="#131824" stroke="#1e2d45"/>
+        <text x="526" y="185" text-anchor="middle" fill="#10b981" font-size="9">DashboardCards</text>
+        <text x="526" y="202" text-anchor="middle" fill="#5a7196" font-size="8">LazyRow</text>
+        <rect x="584" y="164" width="100" height="48" rx="5" fill="#131824" stroke="#1e2d45"/>
+        <text x="634" y="185" text-anchor="middle" fill="#10b981" font-size="9">TransactionListItem</text>
+        <text x="634" y="202" text-anchor="middle" fill="#5a7196" font-size="8">Icon · Desc · Date/Amt</text>
+        <rect x="692" y="164" width="88" height="48" rx="5" fill="#131824" stroke="#1e2d45"/>
+        <text x="736" y="185" text-anchor="middle" fill="#10b981" font-size="9">DatePickerField</text>
+        <text x="736" y="202" text-anchor="middle" fill="#5a7196" font-size="8">DatePickerDialog</text>
+        <rect x="476" y="222" width="100" height="36" rx="5" fill="#131824" stroke="#1e2d45"/>
+        <text x="526" y="244" text-anchor="middle" fill="#a78bfa" font-size="9">SettingsDialog</text>
+        <rect x="584" y="222" width="100" height="36" rx="5" fill="#131824" stroke="#1e2d45"/>
+        <text x="634" y="244" text-anchor="middle" fill="#a78bfa" font-size="9">ConfirmationDialog</text>
+        <rect x="692" y="222" width="88" height="36" rx="5" fill="#131824" stroke="#1e2d45"/>
+        <text x="736" y="244" text-anchor="middle" fill="#a78bfa" font-size="9">FormFieldRow</text>
+
+        <!-- Arrows DataSource → ViewModel -->
+        <line x1="160" y1="170" x2="218" y2="170" stroke="#10b981" stroke-width="1.2" marker-end="url(#arr)"/>
+
+        <!-- ViewModel → UI (State Down) -->
+        <line x1="400" y1="150" x2="458" y2="150" stroke="#10b981" stroke-width="1.2" marker-end="url(#arr)"/>
+        <text x="429" y="143" text-anchor="middle" fill="#10b981" font-size="8.5">state ↓</text>
+
+        <!-- UI → ViewModel (Events Up) -->
+        <line x1="458" y1="195" x2="400" y2="195" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arr-purple)"/>
+        <text x="429" y="215" text-anchor="middle" fill="#a78bfa" font-size="8.5">events ↑</text>
+
+        <!-- Legend -->
+        <line x1="20" y1="320" x2="45" y2="320" stroke="#10b981" stroke-width="1.2"/>
+        <text x="50" y="324" fill="#5a7196" font-size="8.5">State Down (Flow → collectAsState)</text>
+        <line x1="280" y1="320" x2="305" y2="320" stroke="#a78bfa" stroke-width="1.2"/>
+        <text x="310" y="324" fill="#5a7196" font-size="8.5">Events Up (callbacks → ViewModel)</text>
+      </svg>
+    </div>
+
+    <div class="code-block" style="margin-top:28px;">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Kotlin · TransactionViewModel.kt — dashboardState Flow</span>
+      </div>
+      <pre><span class="cm">// Estado calculado reativamente a partir da lista de transações</span>
+<span class="kw">val</span> dashboardState = _transactions.map { list ->
+    <span class="kw">val</span> completedIncome = list
+        .filter { it.type == <span class="type">TransactionType</span>.INCOME &amp;&amp; it.isCompleted }
+        .sumOf { it.amount }
+    <span class="kw">val</span> completedExpenses = list
+        .filter { it.type == <span class="type">TransactionType</span>.EXPENSE &amp;&amp; it.isCompleted }
+        .sumOf { it.amount }
+    <span class="kw">val</span> toReceive = list.filter { it.type == INCOME &amp;&amp; !it.isCompleted }.sumOf { it.amount }
+    <span class="kw">val</span> toPay    = list.filter { it.type == EXPENSE &amp;&amp; !it.isCompleted }.sumOf { it.amount }
+    <span class="kw">val</span> currentBalance   = completedIncome - completedExpenses
+    <span class="kw">val</span> projectedBalance = currentBalance + toReceive - toPay
+
+    <span class="type">DashboardState</span>(currentBalance, toReceive, toPay, projectedBalance)
+}
+
+<span class="cm">// Na UI — State Down: o Composable só observa, nunca calcula</span>
+<span class="kw">val</span> state <span class="kw">by</span> viewModel.dashboardState.<span class="fn">collectAsState</span>(initial = <span class="kw">null</span>)</pre>
+    </div>
+  </section>
+
+  <!-- ═══ IMPLEMENTATION ═══ -->
+  <section id="implementation" class="section">
+    <div class="section-label">Implementação</div>
+    <h2 class="section-title">Principais Decisões Técnicas</h2>
+
+    <h3 style="font-size:15px;font-weight:600;color:var(--text);margin:24px 0 12px;">TransactionListItem — Layout conforme enunciado</h3>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">
+      O item da lista implementa exatamente o layout especificado: ícone à esquerda com cor por tipo,
+      linha 1 apenas com descrição, linha 2 com data à esquerda e valor com sinal negativo à direita.
+    </p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Kotlin · TransactionListItem.kt</span>
+      </div>
+      <pre><span class="kw">val</span> typeColor  = <span class="kw">if</span> (transaction.type == <span class="type">TransactionType</span>.INCOME) ColorIncome <span class="kw">else</span> ColorExpense
+<span class="kw">val</span> amountText = (<span class="kw">if</span> (transaction.type == <span class="type">TransactionType</span>.EXPENSE) <span class="str">"-"</span> <span class="kw">else</span> <span class="str">""</span>) +
+                 transaction.amount.<span class="fn">formatAsBrazilianCurrency</span>()
+
+<span class="type">Row</span>(...) {
+    <span class="cm">// Ícone à esquerda — cor por TIPO, forma por STATUS</span>
+    <span class="type">Icon</span>(
+        imageVector = <span class="kw">if</span> (transaction.isCompleted) Icons.Default.CheckCircle
+                      <span class="kw">else</span> Icons.Default.Schedule,
+        tint = typeColor,   <span class="cm">// Color(0xFF00984E) ou Color(0xFFCF5355)</span>
+        modifier = Modifier.size(<span class="num">32</span>.dp)
+    )
+    <span class="type">Column</span>(modifier = Modifier.weight(<span class="num">1f</span>)) {
+        <span class="cm">// Linha 1 — apenas descrição</span>
+        <span class="type">Text</span>(text = transaction.description, color = Color.White, maxLines = <span class="num">1</span>)
+        <span class="cm">// Linha 2 — data à esq, valor à dir (com sinal negativo para despesas)</span>
+        <span class="type">Row</span>(horizontalArrangement = Arrangement.SpaceBetween) {
+            <span class="type">Text</span>(text = transaction.dueDate.format(dateFormatter), color = Color.White.copy(alpha = <span class="num">.7f</span>))
+            <span class="type">Text</span>(text = amountText, color = typeColor, fontWeight = FontWeight.ExtraBold)
+        }
     }
 }</pre>
-      </div>
+    </div>
 
-      <div class="callout">
-        <strong>Compatibilidade:</strong> O projeto utiliza a <strong>BOM (Bill of Materials) 2024.09.00</strong>, garantindo compatibilidade entre as bibliotecas de UI e Lifecycle, com suporte nativo desde o Android 7.0 (API 24).
+    <h3 style="font-size:15px;font-weight:600;color:var(--text);margin:32px 0 12px;">Validação do Campo Valor — Proteção contra Crash</h3>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Kotlin · TransactionFormScreen.kt — input guard</span>
       </div>
-    </section>
+      <pre><span class="cm">// Filtro na entrada: aceita apenas dígitos e um único ponto decimal</span>
+<span class="cm">// Previne crash ao receber letras, vírgulas, múltiplos pontos, etc.</span>
+onValueChange = { input ->
+    <span class="kw">if</span> (input.isEmpty() || input.matches(<span class="type">Regex</span>(<span class="str">"^\\d*\\.?\\d*$"</span>))) {
+        amountStr = input
+    }
+    amountError = <span class="kw">false</span>
+}
+
+<span class="cm">// Validação no save: campo obrigatório + parseável como Double</span>
+<span class="kw">val</span> amount = amountStr.<span class="fn">toDoubleOrNull</span>()
+descriptionError = description.<span class="fn">isBlank</span>()
+amountError      = amountStr.<span class="fn">isBlank</span>() || amount == <span class="kw">null</span>
+
+<span class="kw">if</span> (!descriptionError &amp;&amp; !amountError) {
+    <span class="fn">onSave</span>(<span class="type">Transaction</span>(amount = amount ?: <span class="num">0.0</span>, ...))
+}</pre>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;color:var(--text);margin:32px 0 12px;">DatePickerField — Campo de Data Composable</h3>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Kotlin · DatePickerField.kt — componente reutilizável</span>
+      </div>
+      <pre><span class="cm">// Campo de data read-only que abre DatePickerDialog ao ser tocado</span>
+<span class="cm">// Substituiu o campo de texto livre do projeto original</span>
+<span class="kw">val</span> datePickerDialog = <span class="type">DatePickerDialog</span>(
+    context,
+    { _, y, m, d -> <span class="fn">onDateSelected</span>(<span class="type">LocalDate</span>.of(y, m + <span class="num">1</span>, d)) },
+    selectedDate.year,
+    selectedDate.monthValue - <span class="num">1</span>,
+    selectedDate.dayOfMonth
+)
+
+<span class="type">OutlinedTextField</span>(
+    value   = selectedDate.<span class="fn">format</span>(dateFormatter),  <span class="cm">// dd/MM/yyyy</span>
+    enabled = <span class="kw">false</span>,    <span class="cm">// bloqueia teclado — só aceita DatePicker</span>
+    modifier = Modifier.fillMaxWidth().<span class="fn">clickable</span> { datePickerDialog.<span class="fn">show</span>() },
+    trailingIcon = { <span class="type">Icon</span>(Icons.Default.CalendarMonth, ...) },
+    colors = OutlinedTextFieldDefaults.colors(
+        disabledTextColor        = Color.White,
+        disabledBorderColor      = Color.White.copy(alpha = <span class="num">.5f</span>),
+        disabledTrailingIconColor = Color.White.copy(alpha = <span class="num">.7f</span>)
+    )
+)</pre>
+    </div>
+  </section>
+
+  <!-- ═══ DESIGN ═══ -->
+  <section id="design" class="section">
+    <div class="section-label">Design System</div>
+    <h2 class="section-title">Sistema Visual — Cores e Decisões</h2>
+    <p class="section-sub">
+      O design ignora o tema claro padrão do Material 3. Toda a interface é construída sobre
+      um fundo de gradiente escuro (DarkBlue → Purple), com tipografia ampliada e cores semânticas
+      que comunicam status financeiro de forma imediata e inequívoca.
+    </p>
+
+    <div class="color-grid">
+      <div class="swatch" style="background:#0F172A;border:1px solid #1e2d45;">
+        <div class="swatch-hex" style="color:#5a7196;">#0F172A</div>
+        <div class="swatch-name" style="color:#e2e8f0;">Dark Blue</div>
+        <div class="swatch-use" style="color:#5a7196;">Fundo principal · Gradiente top</div>
+      </div>
+      <div class="swatch" style="background:#4C1D95;border:1px solid #5b2da0;">
+        <div class="swatch-hex" style="color:#a78bfa;">#4C1D95</div>
+        <div class="swatch-name" style="color:#e2e8f0;">Purple</div>
+        <div class="swatch-use" style="color:#c4b5fd;">Gradiente bottom · Premium</div>
+      </div>
+      <div class="swatch" style="background:#00984E;border:1px solid #00b35b;">
+        <div class="swatch-hex" style="color:#86efac;">#00984E</div>
+        <div class="swatch-name" style="color:#e2e8f0;">Income Green</div>
+        <div class="swatch-use" style="color:#bbf7d0;">Receita · Ícone · Valor</div>
+      </div>
+      <div class="swatch" style="background:#CF5355;border:1px solid #e06062;">
+        <div class="swatch-hex" style="color:#fca5a5;">#CF5355</div>
+        <div class="swatch-name" style="color:#e2e8f0;">Expense Red</div>
+        <div class="swatch-use" style="color:#fecaca;">Despesa · Ícone · Valor</div>
+      </div>
+      <div class="swatch" style="background:#F59E0B;border:1px solid #fbbf24;">
+        <div class="swatch-hex" style="color:#1a0f00;">#F59E0B</div>
+        <div class="swatch-name" style="color:#1a0f00;">Pending Amber</div>
+        <div class="swatch-use" style="color:#451a03;">Saldo Projetado · Futuro</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>Racionalidade das cores:</strong> Verde (#00984E) e vermelho (#CF5355) são as cores
+      especificadas no próprio enunciado da UTFPR — escolhidas por serem universalmente associadas a
+      lucro e perda em sistemas financeiros. O gradiente DarkBlue → Purple comunica <em>premium</em>
+      e <em>confiança</em> sem recorrer ao visual genérico de fintech blue. O âmbar para projeções
+      sinaliza <em>atenção / futuro</em> sem alarme — convenção de dashboards financeiros.
+    </div>
+
+    <div class="callout-warn callout" style="margin-top:16px;">
+      <strong>Acessibilidade:</strong> Todos os textos usam <code>Color.White</code> sobre fundo escuro,
+      garantindo contraste mínimo 4.5:1 (WCAG AA). Nenhum ícone ou texto principal usa preto —
+      regra aplicada em todo o design system.
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;color:var(--text);margin:32px 0 12px;">Adaptive Icon — Identidade do App</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:20px;">
+      O ícone foi desenhado como vector drawable XML em duas camadas (background + foreground),
+      seguindo o sistema adaptive icon do Android (API 26+). O background replica o gradiente do app
+      (DarkBlue → Purple via <code>&lt;gradient&gt;</code> no aapt). O foreground traz as duas setas
+      — verde subindo (Receita) e vermelha descendo (Despesa) — com um círculo branco representando
+      a moeda. O Android OS aplica a máscara de forma do launcher automaticamente.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="code-block" style="margin:0;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">ic_launcher_background.xml — gradiente</span>
+        </div>
+        <pre><span class="xml-tag">&lt;path</span> <span class="xml-attr">android:pathData=</span><span class="xml-val">"M0,0 L108,0 L108,108 L0,108 Z"</span><span class="xml-tag">&gt;</span>
+  <span class="xml-tag">&lt;aapt:attr</span> <span class="xml-attr">name=</span><span class="xml-val">"android:fillColor"</span><span class="xml-tag">&gt;</span>
+    <span class="xml-tag">&lt;gradient</span>
+        <span class="xml-attr">android:type=</span><span class="xml-val">"linear"</span>
+        <span class="xml-attr">android:startY=</span><span class="xml-val">"0"</span>
+        <span class="xml-attr">android:endY=</span><span class="xml-val">"108"</span><span class="xml-tag">&gt;</span>
+      <span class="xml-tag">&lt;item</span> <span class="xml-attr">android:color=</span><span class="xml-val">"#FF0F172A"</span><span class="xml-tag">/&gt;</span>
+      <span class="xml-tag">&lt;item</span> <span class="xml-attr">android:color=</span><span class="xml-val">"#FF4C1D95"</span><span class="xml-tag">/&gt;</span>
+    <span class="xml-tag">&lt;/gradient&gt;</span>
+  <span class="xml-tag">&lt;/aapt:attr&gt;</span>
+<span class="xml-tag">&lt;/path&gt;</span></pre>
+      </div>
+      <div class="code-block" style="margin:0;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">ic_launcher_foreground.xml — setas</span>
+        </div>
+        <pre><span class="cm">&lt;!-- Seta para cima — Receita / Income --&gt;</span>
+<span class="xml-tag">&lt;path</span>
+    <span class="xml-attr">android:fillColor=</span><span class="xml-val">"#FF00984E"</span>
+    <span class="xml-attr">android:pathData=</span><span class="xml-val">"M36,36 L50,58 L43,58
+                        L43,87 L29,87 L29,58 L22,58 Z"</span><span class="xml-tag">/&gt;</span>
+
+<span class="cm">&lt;!-- Seta para baixo — Despesa / Expense --&gt;</span>
+<span class="xml-tag">&lt;path</span>
+    <span class="xml-attr">android:fillColor=</span><span class="xml-val">"#FFCF5355"</span>
+    <span class="xml-attr">android:pathData=</span><span class="xml-val">"M72,87 L58,65 L65,65
+                        L65,36 L79,36 L79,65 L86,65 Z"</span><span class="xml-tag">/&gt;</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STACK ═══ -->
+  <section id="stack" class="section">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Frameworks e Justificativas</h2>
+    <p class="section-sub">
+      Cada biblioteca foi escolhida por maturidade, suporte oficial do Google e aderência ao
+      padrão recomendado para Android moderno — não por familiaridade ou conveniência.
+    </p>
+
+    <div class="tech-grid">
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">🚀</div>
+        <div class="tech-cell-name">Jetpack Compose (BOM 2024.09)</div>
+        <div class="tech-cell-role">Framework declarativo de UI do Google. Substitui XML de layouts, elimina findViewById, simplifica o estado com recomposição automática. Material 3 integrado nativamente.</div>
+        <span class="tech-cell-tag">ui · declarativo</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">⚙️</div>
+        <div class="tech-cell-name">Kotlin 2.2.10 + K2 Compiler</div>
+        <div class="tech-cell-role">Tipo-safe, null-safe, com suporte nativo a coroutines e Flow. O K2 (novo frontend do compilador Kotlin) melhora tempo de build e inferência de tipos — critical para evitar o erro de tipo nas lambdas do SettingsDialog.</div>
+        <span class="tech-cell-tag">language</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">🏛️</div>
+        <div class="tech-cell-name">ViewModel + StateFlow</div>
+        <div class="tech-cell-role">ViewModel sobrevive a rotação de tela e configuration changes. StateFlow é o canal reativo de estado — a UI observa via <code>collectAsState()</code>, nunca manipula estado diretamente.</div>
+        <span class="tech-cell-tag purple">arquitetura</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">🌐</div>
+        <div class="tech-cell-name">AndroidX AppCompat 1.7.1</div>
+        <div class="tech-cell-role">Necessário especificamente para o <code>AppCompatDelegate.setApplicationLocales()</code> — a única API que permite troca de idioma em runtime sem reiniciar o app. A Activity herda de AppCompatActivity por este motivo.</div>
+        <span class="tech-cell-tag">i18n</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">📅</div>
+        <div class="tech-cell-name">java.time (API 26+)</div>
+        <div class="tech-cell-role"><code>LocalDate</code> para representação de datas sem timezone, imutável e tipada. Elimina os bugs históricos de <code>java.util.Date</code>. Min SDK 26 foi definido exatamente para habilitar java.time sem desugaring.</div>
+        <span class="tech-cell-tag">utilities</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">🎨</div>
+        <div class="tech-cell-name">Material Icons Extended</div>
+        <div class="tech-cell-role">Biblioteca completa de ícones do Material Design (2000+). Usada para CheckCircle, Schedule, Settings, Add, ArrowBack, EditCalendar, Notes — todos os ícones do app sem assets externos.</div>
+        <span class="tech-cell-tag">ui</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">🏗️</div>
+        <div class="tech-cell-name">AGP 9.1.0 + Gradle Wrapper</div>
+        <div class="tech-cell-role">Android Gradle Plugin versão-lockada para builds reprodutíveis. Suporte a Compose Compiler via plugin aliasing (Kotlin Compose plugin). compileSdk 36 · targetSdk 36.</div>
+        <span class="tech-cell-tag">build</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">🔤</div>
+        <div class="tech-cell-name">Sistema de Recursos Android (XML)</div>
+        <div class="tech-cell-role">strings.xml (PT-BR + EN-US), locales_config.xml, AndroidManifest.xml, adaptive icon drawables. Camada de plataforma que o Compose consome mas não substitui — veja seção "XML no Compose".</div>
+        <span class="tech-cell-tag purple">plataforma</span>
+      </div>
+      <div class="tech-cell fade-in">
+        <div class="tech-cell-icon">✅</div>
+        <div class="tech-cell-name">JUnit 4 + AndroidX Test</div>
+        <div class="tech-cell-role">Infraestrutura de testes unitários e instrumentados incluída na configuração base. A arquitetura UDF facilita testes unitários do ViewModel isolado da UI.</div>
+        <span class="tech-cell-tag">testing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPATIBILITY ═══ -->
+  <section id="compat" class="section">
+    <div class="section-label">Compatibilidade</div>
+    <h2 class="section-title">Requisitos de Plataforma</h2>
+    <p class="section-sub">
+      O Min SDK 26 foi escolhido deliberadamente para habilitar <code>java.time.LocalDate</code>
+      sem desugaring e garantir suporte a Adaptive Icons. O target SDK 36 mantém o app alinhado
+      com as políticas atuais da Google Play.
+    </p>
+
+    <div class="identity-card" style="max-width:780px;margin-top:28px;">
+      <div class="identity-field">
+        <div class="ifield-label">compileSdk</div>
+        <div class="ifield-value mono">36 (Android 16 Preview)</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">targetSdk</div>
+        <div class="ifield-value mono">36</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">minSdk</div>
+        <div class="ifield-value mono">26 — Android 8.0 Oreo</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Kotlin</div>
+        <div class="ifield-value mono">2.2.10 (K2 Compiler)</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Compose BOM</div>
+        <div class="ifield-value mono">2024.09.00</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">AGP</div>
+        <div class="ifield-value mono">9.1.0</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">JVM Target</div>
+        <div class="ifield-value mono">Java 11 (source compat)</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Adaptive Icons</div>
+        <div class="ifield-value mono">API 26+ (Android 8.0+)</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Runtime Locale</div>
+        <div class="ifield-value mono">AppCompatDelegate — API 21+</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">localeConfig manifest</div>
+        <div class="ifield-value mono">Nativo API 33 · Compat via AppCompat</div>
+      </div>
+    </div>
+
+    <div class="callout-warn callout" style="margin-top:24px;">
+      <strong>Por que Min SDK 26 e não 24?</strong> O projeto anterior (Vehicle Registry) usava Min SDK 24.
+      Aqui, o uso de <code>java.time.LocalDate</code> como tipo de data requer API 26 sem configuração
+      de desugaring. A escolha foi manter o código mais simples e aproveitar os Adaptive Icons nativos
+      (também API 26) ao invés de adicionar uma camada de compatibilidade.
+    </div>
+
+    <div style="margin-top:28px;background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:24px;">
+      <h3 style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:16px;font-family:var(--mono);">Cobertura de Dispositivos Android</h3>
+      <div style="display:flex;align-items:flex-end;gap:6px;height:80px;">
+        <!-- Approximate distribution bars -->
+        <div style="flex:1;text-align:center;">
+          <div style="background:#ef444420;border:1px solid #ef444440;border-radius:3px 3px 0 0;height:8px;"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:4px;">24–25</div>
+          <div style="font-family:var(--mono);font-size:8px;color:#ef4444;">~7%</div>
+          <div style="font-size:8px;color:var(--text3);">excluído</div>
+        </div>
+        <div style="flex:1;text-align:center;">
+          <div style="background:var(--accent-dim);border:1px solid #10b98140;border-radius:3px 3px 0 0;height:20px;"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:4px;">26–27</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--accent);">~8%</div>
+        </div>
+        <div style="flex:1;text-align:center;">
+          <div style="background:var(--accent-dim);border:1px solid #10b98140;border-radius:3px 3px 0 0;height:35px;"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:4px;">28–29</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--accent);">~12%</div>
+        </div>
+        <div style="flex:1;text-align:center;">
+          <div style="background:var(--accent-dim);border:1px solid #10b98140;border-radius:3px 3px 0 0;height:50px;"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:4px;">30–32</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--accent);">~20%</div>
+        </div>
+        <div style="flex:1;text-align:center;">
+          <div style="background:var(--accent-dim);border:1px solid #10b98140;border-radius:3px 3px 0 0;height:70px;"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:4px;">33–34</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--accent);">~28%</div>
+        </div>
+        <div style="flex:1;text-align:center;">
+          <div style="background:var(--accent-dim);border:1px solid #10b98140;border-radius:3px 3px 0 0;height:55px;"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:4px;">35+</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--accent);">~18%</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:12px;">
+        Min SDK 26 cobre aproximadamente <strong style="color:var(--accent);">~93% dos dispositivos Android ativos</strong>
+        (fonte: Android Dashboard, distribuição estimada 2025).
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="section" style="border-bottom:none;">
+    <div class="section-label">Sobre o Projeto</div>
+    <h2 class="section-title">Contexto e Contato</h2>
+    <p class="section-sub">
+      Este projeto foi desenvolvido como trabalho final da disciplina de
+      <strong>Interfaces Gráficas em Aplicações para Dispositivos Móveis</strong>,
+      parte do Curso de Especialização em Programação para Dispositivos Móveis da UTFPR.
+      Representa a adição da stack <strong>Jetpack Compose + Kotlin + Material 3</strong>
+      ao meu portfólio de desenvolvimento Android nativo.
+    </p>
+    <div class="identity-card" style="max-width:700px;margin-top:24px;">
+      <div class="identity-field">
+        <div class="ifield-label">Nome</div>
+        <div class="ifield-value">Rogério Corrêa Bianchini</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Foco</div>
+        <div class="ifield-value">Android Native · Jetpack Compose · Firebase · REST</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Disciplina</div>
+        <div class="ifield-value">Interfaces Gráficas em Aplicações para Dispositivos Móveis</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Instituição</div>
+        <div class="ifield-value">UTFPR — Curso de Especialização em Programação para Dispositivos Móveis</div>
+      </div>
+      <div class="identity-field">
+        <div class="ifield-label">Entrega</div>
+        <div class="ifield-value mono">12/04/2026 · via Moodle</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-info">
+      <div>Rogério Corrêa Bianchini · Mobile Systems Engineering</div>
+      <div style="margin-top:3px;color:var(--text3);">Livro Caixa · Jetpack Compose · UTFPR · 2026</div>
+    </div>
+    <div class="footer-badges">
+      <span class="fbadge">Kotlin 2.2</span>
+      <span class="fbadge">Compose BOM 2024.09</span>
+      <span class="fbadge">Material 3</span>
+      <span class="fbadge">UDF / MVVM</span>
+      <span class="fbadge">i18n PT-BR · EN-US</span>
+      <span class="fbadge">API 26+</span>
+      <span class="fbadge">UTFPR</span>
+    </div>
+  </footer>
+
+</main>
+</div>
+
+<script>
+  // ─── Active nav on scroll ───
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ─── Fade in on scroll ───
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => fadeObserver.observe(el));
+</script>
+</body>
+</html>
