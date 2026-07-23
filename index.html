@@ -1,515 +1,619 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rogério Bianchini — Technical Account Manager & Systems Architect</title>
-  <meta name="description" content="15 years closing complex deals. Now building the systems that make great outcomes inevitable — from IoT hardware to automated pipelines." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rogério Bianchini — Sales Leader turned Systems Builder</title>
+<meta name="description" content="15 years closing enterprise deals. Now I build the systems behind the pitch — and help technical teams decide what to trust." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:       #090909;
-      --surface:  #111111;
-      --surface2: #191919;
-      --border:   #232323;
-      --border2:  #2e2e2e;
-      --text:     #ede9e3;
-      --muted:    #6b6b6b;
-      --subtle:   #444;
-      --gold:     #c9a96e;
-      --gold-dim: #8a6f42;
-      --blue:     #5b9cf6;
-      --green:    #52b788;
-      --coral:    #e07a5f;
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body:    'Outfit', system-ui, sans-serif;
-    }
+  :root {
+    --bg:       #0a0a0a;
+    --surface:  #121212;
+    --surface2: #191919;
+    --surface3: #1f1f1f;
+    --border:   #242424;
+    --border2:  #2f2f2f;
+    --text:     #ede9e3;
+    --muted:    #8a8a8a;
+    --subtle:   #55554f;
+    --gold:     #c9a96e;
+    --gold-dim: #8a6f42;
+    --gold-soft: rgba(201,169,110,0.1);
+    --blue:     #6fa3f7;
+    --green:    #5cc190;
+    --coral:    #e2836a;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body:    'Outfit', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.25rem 2.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(9,9,9,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-name {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
-    .nav-name span { color: var(--gold); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 400;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
+  ::selection { background: var(--gold-soft); color: var(--gold); }
 
-    /* ─── LAYOUT ─── */
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
-    section { padding: 7rem 0; }
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-      max-width: 60px;
-    }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.15rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-name span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    border: 1px solid var(--border2);
+    padding: 0.45rem 1rem;
+    border-radius: 3px;
+    font-size: 0.76rem !important;
+  }
+  .nav-cta:hover { border-color: var(--gold-dim); }
 
-    /* ─── HERO ─── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 9rem 2.5rem 5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .hero-location {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .hero-location::before {
-      content: '';
-      display: inline-block;
-      width: 2rem; height: 1px;
-      background: var(--gold-dim);
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      font-weight: 700;
-      line-height: 1.04;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-    }
-    .hero-name .accent { color: var(--gold); }
-    .hero-nick {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
-      font-weight: 300;
-      color: var(--muted);
-      margin-bottom: 1.75rem;
-      letter-spacing: 0.04em;
-    }
-    .hero-tagline {
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      color: var(--muted);
-      font-weight: 300;
-      max-width: 650px;
-      line-height: 1.7;
-      margin-bottom: 2.75rem;
-    }
-    .hero-tagline strong { color: var(--text); font-weight: 500; }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn {
-      display: inline-block;
-      padding: 0.72rem 1.6rem;
-      border-radius: 3px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-primary { background: var(--gold); color: #080808; }
-    .btn-primary:hover { background: #d9b87e; }
-    .btn-outline { border: 1px solid var(--border2); color: var(--muted); }
-    .btn-outline:hover { border-color: var(--gold-dim); color: var(--text); }
+  /* ─── LAYOUT ─── */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 2.5rem; }
+  section { padding: 6.5rem 0; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  .section-sub {
+    color: var(--muted);
+    max-width: 560px;
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
 
-    /* ─── METRICS ─── */
-    #metrics { padding: 0 2.5rem 5rem; max-width: 1100px; margin: 0 auto; }
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .metric-card {
-      background: var(--surface);
-      padding: 2rem 1.75rem;
-      position: relative;
-      transition: background 0.2s;
-    }
-    .metric-card:hover { background: var(--surface2); }
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .metric-card:hover::before { opacity: 1; }
-    .metric-number {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .metric-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .metric-note { font-size: 0.8rem; color: var(--subtle); line-height: 1.5; }
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8.5rem 2.5rem 4rem;
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--gold-dim);
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6.4vw, 5.4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.1rem;
+  }
+  .hero-name .accent { color: var(--gold); }
+  .hero-role {
+    font-size: clamp(1rem, 1.9vw, 1.2rem);
+    color: var(--text);
+    font-weight: 400;
+    margin-bottom: 1.6rem;
+  }
+  .hero-role b { color: var(--gold); font-weight: 600; }
+  .hero-role .sep { color: var(--subtle); margin: 0 0.4rem; }
+  .hero-tagline {
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 640px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-tagline strong { color: var(--text); font-weight: 500; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.6rem;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-body);
+  }
+  .btn-primary { background: var(--gold); color: #0a0a0a; }
+  .btn-primary:hover { background: #d9b87e; transform: translateY(-1px); }
+  .btn-outline { border: 1px solid var(--border2); color: var(--muted); background: transparent; }
+  .btn-outline:hover { border-color: var(--gold-dim); color: var(--text); }
 
-    /* ─── JOURNEY ─── */
-    .journey-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
-    .era-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2.25rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
-    .era-card:hover { border-color: var(--gold-dim); }
-    .era-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, var(--gold-dim), transparent);
-    }
-    .era-years {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 0.75rem;
-    }
-    .era-title {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-      line-height: 1.25;
-    }
-    .era-subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .era-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .era-list li {
-      font-size: 0.88rem;
-      color: var(--text);
-      padding-left: 1.2rem;
-      position: relative;
-      line-height: 1.5;
-    }
-    .era-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold-dim); }
+  /* ─── METRICS ─── */
+  #metrics { padding: 0 2.5rem 5rem; max-width: 1080px; margin: 0 auto; }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .metric-card {
+    background: var(--surface);
+    padding: 1.85rem 1.6rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .metric-card:hover { background: var(--surface2); }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .metric-card:hover::before { opacity: 1; }
+  .metric-number {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .metric-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+  .metric-note { font-size: 0.78rem; color: var(--subtle); line-height: 1.5; }
 
-    /* ─── PROJECTS ─── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 2.5rem;
-    }
-    .project-card {
-      background: var(--surface);
-      padding: 1.75rem;
-      text-decoration: none;
-      display: block;
-      transition: background 0.2s;
-      position: relative;
-    }
-    .project-card:hover { background: var(--surface2); }
-    .project-card.featured { grid-column: 1 / -1; }
+  /* ─── TRIPTYCH (Sell/Build/Decide) ─── */
+  .triptych {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .tri-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .tri-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+  .tri-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--gold-dim);
+    margin-bottom: 1.1rem;
+    letter-spacing: 0.1em;
+  }
+  .tri-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  .tri-text { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
+  .tri-text strong { color: var(--text); font-weight: 500; }
 
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .project-tag {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.22rem 0.65rem;
-      border-radius: 2px;
-    }
-    .tag-featured { background: rgba(201,169,110,0.12); color: var(--gold); }
-    .tag-active   { background: rgba(82,183,136,0.12);  color: var(--green); }
-    .tag-building { background: rgba(91,156,246,0.12);  color: var(--blue); }
-    .tag-iot      { background: rgba(224,122,95,0.12);  color: var(--coral); }
+  /* ─── JOURNEY ─── */
+  .journey-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .era-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .era-card:hover { border-color: var(--gold-dim); }
+  .era-years {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.75rem;
+  }
+  .era-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+  .era-subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.3rem; }
+  .era-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .era-list li {
+    font-size: 0.86rem;
+    color: var(--text);
+    padding-left: 1.15rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .era-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold-dim); }
 
-    .project-name {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-      line-height: 1.3;
-    }
-    .project-tagline {
-      font-size: 0.85rem;
-      color: var(--gold-dim);
-      margin-bottom: 1.2rem;
-      font-style: italic;
-    }
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--text);
-      line-height: 1.65;
-      margin-bottom: 1.1rem;
-    }
-    .project-desc strong {
-      color: var(--gold);
-      font-weight: 500;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      display: block;
-      margin-top: 0.8rem;
-      margin-bottom: 0.2rem;
-    }
-    .project-desc p {
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .project-value {
-      font-size: 0.85rem;
-      color: var(--text);
-      border-left: 2px solid var(--green);
-      padding-left: 0.75rem;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-      background: rgba(82,183,136,0.05);
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .stack-pill {
-      font-size: 0.68rem;
-      padding: 0.18rem 0.5rem;
-      border: 1px solid var(--border2);
-      border-radius: 2px;
-      color: var(--subtle);
-    }
+  /* ─── CASE STUDIES ─── */
+  .case-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2.5rem; }
 
-    /* ─── TECH STACK ─── */
-    .stack-section { margin-top: 2.5rem; }
-    .stack-category { margin-bottom: 2rem; }
-    .stack-category-name {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.85rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .stack-tag {
-      padding: 0.38rem 0.8rem;
-      border: 1px solid var(--border2);
-      border-radius: 2px;
-      font-size: 0.8rem;
-      color: var(--text);
-      background: var(--surface);
-      transition: all 0.18s;
-    }
-    .stack-tag:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .case {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .case:hover { border-color: var(--border2); }
 
-    /* ─── CALLOUT ─── */
-    .callout {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 4px 4px 0;
-      padding: 1.4rem 1.6rem;
-      margin-top: 2.5rem;
-    }
-    .callout-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.45rem;
-    }
-    .callout-text { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
-    .callout-text code {
-      background: var(--surface2);
-      color: var(--text);
-      padding: 0.1rem 0.4rem;
-      border-radius: 2px;
-      font-size: 0.78rem;
-      font-family: 'Courier New', monospace;
-    }
+  .case-summary {
+    padding: 2rem 2rem 1.75rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .case-summary::-webkit-details-marker { display: none; }
 
-    /* ─── CONTACT ─── */
-    .contact-headline {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-      margin-top: 1rem;
-    }
-    .contact-sub {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 480px;
-      margin-bottom: 2.25rem;
-      line-height: 1.7;
-    }
-    .contact-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .contact-link {
-      display: flex; align-items: center; gap: 0.4rem;
-      padding: 0.62rem 1.2rem;
-      border: 1px solid var(--border2);
-      border-radius: 3px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.82rem;
-      transition: all 0.2s;
-    }
-    .contact-link:hover { border-color: var(--gold-dim); color: var(--text); }
+  .case-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+  }
+  .case-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .case-tag {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.24rem 0.6rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+  }
+  .tag-fullstack { background: rgba(201,169,110,0.12); color: var(--gold); }
+  .tag-ai        { background: rgba(111,163,247,0.12); color: var(--blue); }
+  .tag-iot       { background: rgba(226,131,106,0.12); color: var(--coral); }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 2.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-    }
-    .live-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-top: 0.5rem;
-      color: var(--green);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .live-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(82,183,136,0.4); }
-      50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(82,183,136,0); }
-    }
+  .case-toggle {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: transform 0.25s, border-color 0.2s, color 0.2s;
+  }
+  .case[open] .case-toggle { transform: rotate(45deg); border-color: var(--gold-dim); color: var(--gold); }
+  .case-summary:hover .case-toggle { border-color: var(--gold-dim); color: var(--gold); }
 
-    .divider {
-      width: 100%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-    }
+  .case-name {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .case-tagline {
+    font-size: 0.9rem;
+    color: var(--gold-dim);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .case-problem {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 720px;
+    margin-bottom: 1.3rem;
+  }
+  .case-problem strong { color: var(--text); font-weight: 500; }
 
-    /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+  .case-quicknums { display: flex; gap: 1.75rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+  .qn { display: flex; flex-direction: column; gap: 0.1rem; }
+  .qn-val { font-family: var(--font-display); font-size: 1.3rem; color: var(--gold); line-height: 1; }
+  .qn-label { font-size: 0.68rem; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 760px) {
-      nav { padding: 1rem 1.25rem; }
-      #hero, .wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
-      #metrics { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .journey-grid { grid-template-columns: 1fr; }
-      .hero-name { font-size: 2.8rem; }
-    }
-    @media (max-width: 480px) { .nav-links { display: none; } }
-  </style>
+  .case-expand-hint {
+    font-size: 0.76rem;
+    color: var(--subtle);
+    margin-top: 1.4rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  .case[open] .case-expand-hint { display: none; }
+
+  .case-body {
+    padding: 0 2rem 2.25rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+  .case-body-inner { padding-top: 1.9rem; }
+
+  .case-section-h {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    margin-top: 1.9rem;
+    font-family: var(--font-mono);
+  }
+  .case-section-h:first-child { margin-top: 0; }
+
+  .arch-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.1rem 1.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .arch-step { display: flex; align-items: baseline; gap: 0.8rem; padding: 0.4rem 0; }
+  .arch-step .layer { color: var(--gold); font-weight: 500; min-width: 90px; }
+  .arch-step .desc { color: var(--muted); }
+  .arch-arrow { color: var(--subtle); font-size: 0.7rem; padding-left: 0.2rem; }
+
+  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .decision {
+    background: var(--surface2);
+    border-left: 2px solid var(--gold-dim);
+    border-radius: 0 4px 4px 0;
+    padding: 0.9rem 1.1rem;
+  }
+  .decision-h { font-size: 0.83rem; color: var(--text); font-weight: 500; margin-bottom: 0.35rem; }
+  .decision-p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  .case-desc-p { font-size: 0.87rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.8rem; }
+  .case-desc-p strong { color: var(--text); font-weight: 500; }
+
+  .case-stack { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.3rem; }
+  .stack-pill {
+    font-size: 0.7rem;
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    color: var(--subtle);
+    font-family: var(--font-mono);
+  }
+
+  .case-links { display: flex; gap: 0.9rem; margin-top: 1.6rem; }
+  .case-link {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .case-link:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+  /* ─── TECH STACK ─── */
+  .stack-section { margin-top: 2.5rem; }
+  .stack-category { margin-bottom: 1.9rem; }
+  .stack-category-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stack-tag {
+    padding: 0.36rem 0.78rem;
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    font-size: 0.79rem;
+    color: var(--text);
+    background: var(--surface);
+    transition: all 0.18s;
+  }
+  .stack-tag:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+  /* ─── CONTACT ─── */
+  .contact-headline {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+    line-height: 1.18;
+    margin-bottom: 1.2rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+  .contact-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 2.1rem;
+    line-height: 1.7;
+  }
+  .contact-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.62rem 1.2rem;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--gold-dim); color: var(--text); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.5rem;
+    color: var(--green);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(92,193,144,0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(92,193,144,0); }
+  }
+
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .triptych { grid-template-columns: 1fr; }
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    nav { padding: 1rem 1.25rem; }
+    #hero, .wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+    #metrics { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .journey-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 2.5rem; }
+    .case-summary, .case-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .case-quicknums { gap: 1.1rem; }
+  }
+  @media (max-width: 480px) { .nav-links { display: none; } }
+</style>
 </head>
 <body>
 
 <nav>
   <a href="#hero" class="nav-name">Rogério <span>Bianchini</span></a>
   <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#work">Case Studies</a></li>
     <li><a href="#journey">Journey</a></li>
-    <li><a href="#case-studies">Case Studies</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-location">Curitiba, Brazil · Building in the open</div>
+  <div class="hero-eyebrow">Curitiba, Brazil · Pre-Sales / Solutions Engineering</div>
   <h1 class="hero-name">
     Rogério<br><span class="accent">Bianchini.</span>
   </h1>
-  <span class="hero-nick">Sales Leader · Systems Architect · Strategic Builder</span>
+  <p class="hero-role"><b>15 years</b> selling to enterprises <span class="sep">·</span> now <b>building</b> what I used to pitch</p>
   <p class="hero-tagline">
-    <strong>15 years closing complex deals.</strong> Now I engineer the systems that make those deals inevitable. I bridge the gap between technical architecture and business decisions—building tools that solve real operational bottlenecks, from automated LLM prospecting engines to secure multi-tenant SaaS platforms.
+    I spent a career on the business side of the table, turning technical capability into signed contracts. Now I build the systems myself — <strong>real backends, real hardware, real AI pipelines</strong> — because understanding how something is actually built is what lets me sell it honestly and help a technical buyer decide with confidence.
   </p>
   <div class="hero-ctas">
-    <a href="#case-studies" class="btn btn-primary">View Case Studies</a>
-    <a href="#journey" class="btn btn-outline">My Journey</a>
-    <a href="https://github.com/rbtech-mobi/portifolioRogerbianchini" target="_blank" class="btn btn-outline">GitHub Repository</a>
+    <a href="#work" class="btn btn-primary">Read the case studies</a>
+    <a href="#approach" class="btn btn-outline">How I work</a>
+    <a href="https://github.com/rbtech-mobi" target="_blank" class="btn btn-outline">GitHub ↗</a>
   </div>
 </section>
 
@@ -519,12 +623,7 @@
     <div class="metric-card reveal">
       <div class="metric-number">188%</div>
       <div class="metric-label">Quota attainment</div>
-      <div class="metric-note">#1 out of 15 Account Executives</div>
-    </div>
-    <div class="metric-card reveal">
-      <div class="metric-number">100%</div>
-      <div class="metric-label">Client retention</div>
-      <div class="metric-note">Zero churn on enterprise portfolio</div>
+      <div class="metric-note">#1 of 15 Account Executives</div>
     </div>
     <div class="metric-card reveal">
       <div class="metric-number">R$700K</div>
@@ -533,47 +632,49 @@
     </div>
     <div class="metric-card reveal">
       <div class="metric-number">100%</div>
-      <div class="metric-label">Business Driven</div>
-      <div class="metric-note">Every line of code solves a sales problem</div>
+      <div class="metric-label">Client retention</div>
+      <div class="metric-note">Zero churn on enterprise portfolio</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">Vulnerabilities shipped</div>
+      <div class="metric-note">Across production-grade side projects</div>
     </div>
   </div>
 </div>
 
 <div class="divider" style="margin-top:5rem;"></div>
 
-<!-- JOURNEY -->
-<section id="journey">
+<!-- APPROACH: SELL / BUILD / DECIDE -->
+<section id="approach">
   <div class="wrap">
-    <div class="section-label">Career journey</div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);line-height:1.2;margin-bottom:0.75rem;">
-      From the showroom floor to system architecture.
-    </h2>
-    <p style="color:var(--muted);max-width:520px;font-size:0.92rem;">
-      Two very different industries. One consistent skill: understanding what drives people to commit, and building the infrastructure to support that commitment.
+    <div class="section-label">How I operate</div>
+    <h2 class="section-title">Three skills most people only ever get one of.</h2>
+    <p class="section-sub">
+      A great sales engineer isn't a salesperson who learned to talk about tech. It's someone who can sell it, build it, and tell a client what's actually true when it matters.
     </p>
 
-    <div class="journey-grid">
-      <div class="era-card reveal">
-        <div class="era-years">2010 — 2021</div>
-        <div class="era-title">The Retail Enterprise Era</div>
-        <div class="era-subtitle">Unit Manager · High-end retail · B2C enterprise</div>
-        <ul class="era-list">
-          <li>11 years managing sales teams in high-ticket retail environments.</li>
-          <li>R$92K/month average closing on individual high-ticket deals.</li>
-          <li>Accountable for LGPD compliance and labor law parameters.</li>
-          <li>Built the foundation: patience, long sales cycles, and uncovering real client needs.</li>
-        </ul>
+    <div class="triptych">
+      <div class="tri-card reveal">
+        <div class="tri-num">01 / SELL</div>
+        <div class="tri-title">Find the real problem</div>
+        <div class="tri-text">
+          Eleven years of high-ticket retail and four in B2B SaaS taught me that people rarely buy the feature — they buy relief from a specific operational pain. <strong>188% quota attainment</strong> came from mapping technical capability to that pain, not from a better pitch deck.
+        </div>
       </div>
-      <div class="era-card reveal">
-        <div class="era-years">2021 — Present</div>
-        <div class="era-title">The SaaS & Systems Era</div>
-        <div class="era-subtitle">Account Manager → Technical Solutions Builder</div>
-        <ul class="era-list">
-          <li>Scaled B2B SaaS solutions across legaltech, fintech, and work management.</li>
-          <li>Achieved 188% quota, outperforming the entire Account Executive team.</li>
-          <li>Mapped complex enterprise requirements to deliver precise technical solutions.</li>
-          <li>Now bridging the gap: engineering local LLM tools, edge IoT devices, and strict-tenant platforms that accelerate sales workflows.</li>
-        </ul>
+      <div class="tri-card reveal">
+        <div class="tri-num">02 / BUILD</div>
+        <div class="tri-title">Ship the actual thing</div>
+        <div class="tri-text">
+          I don't stop at the diagram. The three case studies below are <strong>working systems</strong> — a multi-tenant SaaS backend, an LLM-driven prospecting tool, and embedded firmware talking to a live MQTT broker. Each one exists because a workflow was broken and I fixed it in code.
+        </div>
+      </div>
+      <div class="tri-card reveal">
+        <div class="tri-num">03 / DECIDE</div>
+        <div class="tri-title">Help the buyer commit</div>
+        <div class="tri-text">
+          Technical buyers stall when they can't tell if a vendor actually understands the trade-offs. I can explain <strong>why</strong> money is stored as integer cents, why a cross-tenant lookup returns 404 instead of 403 — and translate that into what it means for a CTO's risk and timeline.
+        </div>
       </div>
     </div>
   </div>
@@ -582,115 +683,282 @@
 <div class="divider"></div>
 
 <!-- CASE STUDIES -->
-<section id="case-studies">
+<section id="work">
   <div class="wrap">
-    <div class="section-label">Engineering for Business Outcomes</div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);line-height:1.2;margin-bottom:0.75rem;">
-      Technical solutions to real operational problems.
-    </h2>
-    <p style="color:var(--muted);max-width:580px;font-size:0.92rem;">
-      I do not write code just to write code. Every architecture below was designed to automate a workflow, secure a revenue stream, or solve a direct bottleneck in the B2B lifecycle.
+    <div class="section-label">Engineering for business outcomes</div>
+    <h2 class="section-title">Three systems, three real problems.</h2>
+    <p class="section-sub">
+      Each one starts with a business bottleneck, not a technology I wanted to try. Click a case to see the architecture and the engineering decisions I'd defend in a review.
     </p>
 
-    <div class="projects-grid">
+    <div class="case-list">
 
-      <!-- OUTREACH CALIBRATOR -->
-      <div class="project-card featured reveal">
-        <div class="project-header">
-          <div class="project-tag tag-featured">Sales Engineering / AI</div>
+      <!-- CASE 1: Multi-tenant SaaS -->
+      <details class="case reveal">
+        <summary class="case-summary">
+          <div class="case-top">
+            <div class="case-tags"><span class="case-tag tag-fullstack">Full-Stack · Architecture</span></div>
+            <div class="case-toggle">+</div>
+          </div>
+          <div class="case-name">Multi-Tenant Meal Business Platform</div>
+          <div class="case-tagline">One codebase, many independent food businesses — each fully isolated.</div>
+          <p class="case-problem">
+            <strong>The problem:</strong> small food businesses need their own ordering system, but building one platform per client doesn't scale — and if it's shared, one tenant's data leaking into another's dashboard is an existential bug, not a cosmetic one.
+          </p>
+          <div class="case-quicknums">
+            <div class="qn"><div class="qn-val">11</div><div class="qn-label">DB tables</div></div>
+            <div class="qn"><div class="qn-val">4</div><div class="qn-label">layers / request</div></div>
+            <div class="qn"><div class="qn-val">13</div><div class="qn-label">automated tests</div></div>
+            <div class="qn"><div class="qn-val">0</div><div class="qn-label">vulnerabilities</div></div>
+            <div class="qn"><div class="qn-val">100%</div><div class="qn-label">integer-cent money</div></div>
+          </div>
+          <div class="case-expand-hint">+ Architecture, engineering decisions & full stack</div>
+        </summary>
+
+        <div class="case-body">
+          <div class="case-body-inner">
+
+            <div class="case-section-h">What it is</div>
+            <p class="case-desc-p">
+              A reusable SaaS where each tenant is an independent food business. Customers browse a responsive public catalog, build a cart, and place orders; owners manage their menu, fulfil orders through a state machine, record payments, and customize their brand — all from an installable Progressive Web App. The single most important invariant is <strong>strict tenant isolation</strong>: no business can ever read or mutate another's data.
+            </p>
+
+            <div class="case-section-h">Every request travels four layers</div>
+            <div class="arch-flow">
+              <div class="arch-step"><span class="layer">Browser</span><span class="desc">Public site & admin PWA — vanilla JS, no framework, offline shell</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Express</span><span class="desc">Request id · Helmet CSP · rate limit · body limits</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Identity</span><span class="desc">Firebase verifies the ID token → request.auth.uid</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Tenant</span><span class="desc">admin_users lookup → request.admin.businessId</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Route→Ctrl</span><span class="desc">Controller maps HTTP ↔ service; Zod validates the contract</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Service</span><span class="desc">Business rules — order transactions, state machine, ledger</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Repository</span><span class="desc">All SQL — parameterized, always scoped by business_id</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">MySQL</span><span class="desc">Pooled connections · row locks · transactions</span></div>
+            </div>
+
+            <div class="case-section-h">Decisions worth defending</div>
+            <div class="decision-grid">
+              <div class="decision">
+                <div class="decision-h">Money as integer cents</div>
+                <div class="decision-p">Prices, totals, and refunds are stored and computed as integers end-to-end. Binary floating point never touches money — the browser only divides by 100 for display.</div>
+              </div>
+              <div class="decision">
+                <div class="decision-h">Append-only payment ledger</div>
+                <div class="decision-p">A refund is a counter-entry, not an edit. Current financial status is derived from the event log, which stays the audit source of truth.</div>
+              </div>
+              <div class="decision">
+                <div class="decision-h">Authentication ≠ authorization</div>
+                <div class="decision-p">Firebase proves identity; a database lookup grants permission. A valid Google account with no admin_users row gets a clean 403.</div>
+              </div>
+              <div class="decision">
+                <div class="decision-h">Idempotency for orders</div>
+                <div class="decision-p">An Idempotency-Key plus a unique index means a double-submit returns the original order instead of charging stock twice.</div>
+              </div>
+              <div class="decision">
+                <div class="decision-h">Untrusted uploads re-encoded</div>
+                <div class="decision-p">Uploads are decoded and re-written as WebP. A file that isn't a real image is rejected; original bytes are never served.</div>
+              </div>
+              <div class="decision">
+                <div class="decision-h">Migration before code</div>
+                <div class="decision-p">Schema changes ship as forward-only migrations that must run before dependent code. Features needing new columns are staged, not rushed.</div>
+              </div>
+            </div>
+
+            <div class="case-section-h">Security posture</div>
+            <p class="case-desc-p">
+              Server-side tenant isolation · parameterized SQL throughout · Firebase token verification · secrets only in environment variables · Helmet CSP tuned for the auth flow · rate limiting · validated image re-encoding · XSS-safe rendering of owner content · cross-tenant lookups indistinguishable from "not found" · dependency advisories resolved to zero.
+            </p>
+
+            <div class="case-section-h">Stack</div>
+            <div class="case-stack">
+              <span class="stack-pill">Node.js (ESM)</span>
+              <span class="stack-pill">Express 5</span>
+              <span class="stack-pill">MySQL</span>
+              <span class="stack-pill">Firebase Auth</span>
+              <span class="stack-pill">Zod</span>
+              <span class="stack-pill">Sharp</span>
+              <span class="stack-pill">Helmet</span>
+              <span class="stack-pill">PWA / Service Worker</span>
+              <span class="stack-pill">Vanilla JS — no build</span>
+              <span class="stack-pill">node:test + Supertest</span>
+            </div>
+
+          </div>
         </div>
-        <div class="project-name">Outreach Calibrator</div>
-        <div class="project-tagline">LLM-powered B2B prospecting engine that eliminates generic outreach</div>
-        <div class="project-desc">
-          <strong>The Business Problem:</strong>
-          <p>Sales Development Representatives (SDRs) face a brutal trade-off: spend hours manually researching a single prospect, or send generic, low-converting automated spam. The lack of context kills the pipeline.</p>
-          
-          <strong>The Architecture:</strong>
-          <p>A frontend interface that acts as an ingestion layer for monday.com CRM webhooks. It vectorizes structured demographic data (role, company) alongside unstructured Natural Language Processing (NLP) inputs—such as a prospect's recent LinkedIn comments or company news. It then queries a connected Large Language Model (LLM) to map the prospect's real-time pain points directly to the seller's specific value proposition.</p>
+      </details>
+
+      <!-- CASE 2: Outreach Calibrator -->
+      <details class="case reveal">
+        <summary class="case-summary">
+          <div class="case-top">
+            <div class="case-tags"><span class="case-tag tag-ai">Sales Engineering · AI</span></div>
+            <div class="case-toggle">+</div>
+          </div>
+          <div class="case-name">Outreach Calibrator</div>
+          <div class="case-tagline">An LLM-powered prospecting tool that kills generic cold outreach.</div>
+          <p class="case-problem">
+            <strong>The problem:</strong> SDRs face a bad trade-off — spend an hour manually researching one prospect, or send generic outreach that converts at near-zero. Context is what makes a message land, and context takes time nobody has at scale.
+          </p>
+          <div class="case-quicknums">
+            <div class="qn"><div class="qn-val">CRM</div><div class="qn-label">webhook ingestion</div></div>
+            <div class="qn"><div class="qn-val">NLP</div><div class="qn-label">unstructured signal</div></div>
+            <div class="qn"><div class="qn-val">1-click</div><div class="qn-label">to calibrated pitch</div></div>
+          </div>
+          <div class="case-expand-hint">+ How it works & the sales logic behind it</div>
+        </summary>
+
+        <div class="case-body">
+          <div class="case-body-inner">
+
+            <div class="case-section-h">What it is</div>
+            <p class="case-desc-p">
+              A frontend built to sit inside a sales workflow, not next to it. It ingests context about a prospect directly from <strong>monday.com</strong> — via webhook or native automation — and if no data has arrived yet, it falls back to a manual entry mode so an SDR can still use it cold.
+            </p>
+
+            <div class="case-section-h">What it vectorizes</div>
+            <p class="case-desc-p">
+              <strong>Structured:</strong> prospect name, role, company, website, and the specific offer being pitched.<br/>
+              <strong>Unstructured (NLP):</strong> free-text research notes — a recent LinkedIn post, a comment, company news, any buying signal a rep found manually.
+            </p>
+
+            <div class="case-section-h">What it does with it</div>
+            <p class="case-desc-p">
+              On "Analyze prospect," the tool sends the combined structured + unstructured payload to a connected LLM, which cross-references the prospect's real pain points against the seller's value proposition — and returns an approach angle calibrated to that specific person, not a template.
+            </p>
+
+            <div class="case-section-h">Worked example</div>
+            <p class="case-desc-p">
+              An SDR selling compliance software pastes in a LinkedIn post where the prospect — a VP of Product — is complaining about compliance friction across a remote team. The tool doesn't generate a generic pitch; it generates an opener that references that exact friction, because the offer was mapped to a real, current pain point instead of a job title.
+            </p>
+
+            <div class="case-section-h">Why this is a sales artifact, not just a tool</div>
+            <p class="case-desc-p">
+              This is the part of the job I actually understand from the inside: I know what makes an SDR skip research, and I know what a rep needs in front of them to send a message that gets a reply. I built the tool I wish I'd had.
+            </p>
+
+            <div class="case-section-h">Stack</div>
+            <div class="case-stack">
+              <span class="stack-pill">LLM Integration</span>
+              <span class="stack-pill">monday.com Webhooks</span>
+              <span class="stack-pill">NLP Vectorization</span>
+              <span class="stack-pill">Sales Automation</span>
+            </div>
+
+          </div>
         </div>
-        <div class="project-value">
-          <strong>Business Impact:</strong> Demonstrates the perfect intersection of sales strategy and software engineering. It automates the SDR research workflow without losing human context, drastically increasing reply rates by ensuring every approach is highly calibrated to current events.
+      </details>
+
+      <!-- CASE 3: Desktop Buddy BTTF -->
+      <details class="case reveal">
+        <summary class="case-summary">
+          <div class="case-top">
+            <div class="case-tags"><span class="case-tag tag-iot">IoT · Edge Computing</span></div>
+            <div class="case-toggle">+</div>
+          </div>
+          <div class="case-name">Desktop Buddy BTTF</div>
+          <div class="case-tagline">A physical MQTT terminal so critical alerts stop dying in Slack.</div>
+          <p class="case-problem">
+            <strong>The problem:</strong> critical workflow approvals get buried under noisy Slack channels and overflowing inboxes. When a response is time-sensitive, a software-only notification is too easy to miss.
+          </p>
+          <div class="case-quicknums">
+            <div class="qn"><div class="qn-val">ESP32-S3</div><div class="qn-label">240 MHz, dual-core</div></div>
+            <div class="qn"><div class="qn-val">TLS</div><div class="qn-label">MQTTS, cert-validated</div></div>
+            <div class="qn"><div class="qn-val">QoS 1</div><div class="qn-label">guaranteed delivery</div></div>
+          </div>
+          <div class="case-expand-hint">+ Hardware, firmware architecture & MQTT contract</div>
+        </summary>
+
+        <div class="case-body">
+          <div class="case-body-inner">
+
+            <div class="case-section-h">What it is</div>
+            <p class="case-desc-p">
+              An interactive desktop companion running bare-metal C++ on a WT32-SC01 Plus (ESP32-S3, 3.5" touch display). It subscribes to an <strong>n8n</strong> orchestration server over MQTT, surfaces the message on a touch terminal, and lets the operator tap a response — <code>SIM / NAO / REVERTA / PARE</code> — that publishes straight back to the broker. Idle, it becomes an animated Back to the Future-themed time-circuit clock.
+            </p>
+
+            <div class="case-section-h">Firmware architecture</div>
+            <div class="arch-flow">
+              <div class="arch-step"><span class="layer">FreeRTOS</span><span class="desc">State machine drives Terminal ↔ Clock screen switching</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Dual WiFi</span><span class="desc">Automatic failover between primary and secondary networks</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">MQTTS / TLS</span><span class="desc">HiveMQ Cloud, cert-validated, QoS 1 on inbound/outbound</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">Touch (I2C)</span><span class="desc">FT5x06 controller — action select, hit detection, debounce</span></div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-step"><span class="layer">LovyanGFX</span><span class="desc">40 MHz parallel bus driving 7-segment & flux-capacitor animation</span></div>
+            </div>
+
+            <div class="case-section-h">MQTT contract</div>
+            <p class="case-desc-p">
+              <strong>Subscribes:</strong> <code>home/llm/inbound</code> (QoS 1) — messages rendered in the terminal.<br/>
+              <strong>Publishes:</strong> <code>home/llm/response</code> — operator's selected action · <code>home/llm/status</code> (retained) — device health heartbeat every 45s, so the broker always knows if the device is alive.
+            </p>
+
+            <div class="case-section-h">Why it matters beyond the novelty</div>
+            <p class="case-desc-p">
+              This proves I can go past the API layer — GPIO, I2C, a parallel display bus, TLS certificate handling, and a real reconnection strategy for a network that will drop. It's the same reliability thinking as the SaaS ledger, just applied to a device instead of a database.
+            </p>
+
+            <div class="case-section-h">Stack</div>
+            <div class="case-stack">
+              <span class="stack-pill">ESP32-S3</span>
+              <span class="stack-pill">C++ / FreeRTOS</span>
+              <span class="stack-pill">MQTT (TLS)</span>
+              <span class="stack-pill">LovyanGFX</span>
+              <span class="stack-pill">ArduinoJson</span>
+              <span class="stack-pill">HiveMQ Cloud</span>
+              <span class="stack-pill">n8n Orchestration</span>
+            </div>
+
+          </div>
         </div>
-        <div class="project-stack">
-          <span class="stack-pill">LLM Integration</span>
-          <span class="stack-pill">monday.com Webhooks</span>
-          <span class="stack-pill">NLP Vectorization</span>
-          <span class="stack-pill">Sales Automation</span>
-        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="wrap">
+    <div class="section-label">Career journey</div>
+    <h2 class="section-title">From the showroom floor to system architecture.</h2>
+    <p class="section-sub">
+      Two very different industries. One consistent skill: understanding what drives people to commit — and now, the infrastructure to back that commitment up.
+    </p>
+
+    <div class="journey-grid">
+      <div class="era-card reveal">
+        <div class="era-years">2010 — 2021</div>
+        <div class="era-title">The Retail Enterprise Era</div>
+        <div class="era-subtitle">Unit Manager · High-end retail · B2C enterprise</div>
+        <ul class="era-list">
+          <li>11 years managing sales teams in high-ticket retail environments</li>
+          <li>R$92K/month average closing on individual high-ticket deals</li>
+          <li>Accountable for LGPD compliance and labor law parameters</li>
+          <li>Built the foundation: patience, long sales cycles, uncovering real needs</li>
+        </ul>
       </div>
-
-      <!-- MULTI-TENANT SAAS -->
-      <div class="project-card featured reveal">
-        <div class="project-header">
-          <div class="project-tag tag-building">Full-Stack / Architecture</div>
-        </div>
-        <div class="project-name">Multi-Tenant SaaS Engine</div>
-        <div class="project-tagline">One codebase securely serving isolated independent businesses</div>
-        <div class="project-desc">
-          <strong>The Business Problem:</strong>
-          <p>Scaling a B2B platform requires absolute trust. If one client's data leaks into another's dashboard, the business dies. Furthermore, handling concurrency in e-commerce (two people buying the last item at the same time) often leads to cancelled orders and damaged brand reputation.</p>
-          
-          <strong>The Architecture:</strong>
-          <p>A monolithic Node.js backend using a disciplined 4-layer routing pipeline (Express 5 + Zod). Identity is verified via Firebase, but authorization is handled entirely in MySQL. The system enforces strict tenant isolation: cross-tenant lookups return a 404, never a 403, preventing resource leakage. Financials are handled via an append-only event ledger, processing all money as integer cents to avoid floating-point binary errors.</p>
-        </div>
-        <div class="project-value">
-          <strong>Business Impact:</strong> Proves the ability to make hard engineering decisions that protect revenue. Utilizing server-priced idempotency guarantees no double-charging, and the append-only ledger provides enterprise-grade auditability.
-        </div>
-        <div class="project-stack">
-          <span class="stack-pill">Node.js / Express 5</span>
-          <span class="stack-pill">MySQL</span>
-          <span class="stack-pill">Firebase Auth</span>
-          <span class="stack-pill">Zod</span>
-          <span class="stack-pill">Progressive Web App (PWA)</span>
-        </div>
+      <div class="era-card reveal">
+        <div class="era-years">2021 — Present</div>
+        <div class="era-title">The SaaS & Systems Era</div>
+        <div class="era-subtitle">Account Manager → Technical Solutions Builder</div>
+        <ul class="era-list">
+          <li>Scaled B2B SaaS across legaltech, fintech, and work management</li>
+          <li>188% quota — outperformed the entire Account Executive team</li>
+          <li>Mapped complex enterprise requirements to precise technical solutions</li>
+          <li>Now: local LLM tools, edge IoT devices, strict multi-tenant platforms</li>
+        </ul>
       </div>
-
-      <!-- DESKTOP BUDDY BTTF -->
-      <div class="project-card featured reveal">
-        <div class="project-header">
-          <div class="project-tag tag-iot">IoT / Edge Computing</div>
-        </div>
-        <div class="project-name">Desktop Buddy BTTF</div>
-        <div class="project-tagline">Real-time MQTT hardware interface for localized workflow alerts</div>
-        <div class="project-desc">
-          <strong>The Business Problem:</strong>
-          <p>Critical system alerts and workflow approvals get lost in overflowing email inboxes and noisy Slack channels. When response time is critical, software-only notifications fail to capture operator attention.</p>
-          
-          <strong>The Architecture:</strong>
-          <p>An interactive, physical desktop companion running on bare-metal C++ (ESP32-S3). It utilizes enterprise MQTT patterns (QoS 1, HiveMQ TLS) to receive real-time notifications from an n8n orchestration server. It features a FreeRTOS state machine, touch-screen action responses, and a robust dual-network failover system to ensure it never loses connection to the broker.</p>
-        </div>
-        <div class="project-value">
-          <strong>Business Impact:</strong> Brings critical operational data to the physical edge with zero latency. It proves deep capability in hardware-software integration, network reliability, and securing IoT endpoints via certificate validation.
-        </div>
-        <div class="project-stack">
-          <span class="stack-pill">ESP32-S3</span>
-          <span class="stack-pill">C++ / FreeRTOS</span>
-          <span class="stack-pill">MQTT (TLS)</span>
-          <span class="stack-pill">LovyanGFX</span>
-          <span class="stack-pill">n8n Orchestration</span>
-        </div>
-      </div>
-
-      <!-- PORTFOLIO AUTOMATION -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-tag tag-active">CI / CD</div>
-        </div>
-        <div class="project-name">Live Proof of Work</div>
-        <div class="project-tagline">A real-time dashboard of active builds</div>
-        <div class="project-desc">
-          <p>This very page is separated from its presentation layer. Using GitHub Actions for scheduled deployments and a local n8n instance for event-driven updates, the site acts as a living system. No manual CV updates required.</p>
-        </div>
-        <div class="project-value">
-          <strong>Business Impact:</strong> Demonstrates a product mindset and continuous integration.
-        </div>
-        <div class="project-stack">
-          <span class="stack-pill">HTML/CSS</span>
-          <span class="stack-pill">GitHub Actions</span>
-          <span class="stack-pill">n8n</span>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -701,9 +969,7 @@
 <section id="stack">
   <div class="wrap">
     <div class="section-label">Tech stack</div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);line-height:1.2;margin-bottom:0.75rem;">
-      Tools applied to commercial problems.
-    </h2>
+    <h2 class="section-title">Tools applied to commercial problems.</h2>
 
     <div class="stack-section">
       <div class="stack-category reveal">
@@ -720,10 +986,10 @@
         <div class="stack-category-name">Backend & Architecture</div>
         <div class="stack-tags">
           <span class="stack-tag">Node.js / Express</span>
-          <span class="stack-tag">MySQL (Relational Data)</span>
+          <span class="stack-tag">MySQL</span>
           <span class="stack-tag">Firebase Authentication</span>
           <span class="stack-tag">REST API Design</span>
-          <span class="stack-tag">Zod (Validation)</span>
+          <span class="stack-tag">Zod</span>
         </div>
       </div>
       <div class="stack-category reveal">
@@ -733,7 +999,6 @@
           <span class="stack-tag">MQTT (HiveMQ / TLS)</span>
           <span class="stack-tag">C++ / FreeRTOS</span>
           <span class="stack-tag">Raspberry Pi</span>
-          <span class="stack-tag">Hardware Orchestration</span>
         </div>
       </div>
       <div class="stack-category reveal">
@@ -750,7 +1015,7 @@
         <div class="stack-category-name">Infrastructure</div>
         <div class="stack-tags">
           <span class="stack-tag">OPNsense / VLANs</span>
-          <span class="stack-tag">Docker Containerization</span>
+          <span class="stack-tag">Docker</span>
           <span class="stack-tag">Proxmox</span>
           <span class="stack-tag">Cybersecurity Compliance</span>
         </div>
@@ -762,18 +1027,16 @@
 <div class="divider"></div>
 
 <!-- CONTACT -->
-<section id="contact" style="padding-bottom:8rem;">
+<section id="contact" style="padding-bottom:7rem;">
   <div class="wrap">
     <div class="section-label">Let's connect</div>
-    <h2 class="contact-headline">
-      Builder looking for<br>interesting problems.
-    </h2>
+    <h2 class="contact-headline">Looking for a role where selling and building aren't separate jobs.</h2>
     <p class="contact-sub">
-      Whether you are building a technical product, scaling a complex B2B sales workflow, or need a leader who deeply understands both sides of the table—let's talk. Based in Curitiba, Brazil. Open to remote collaboration.
+      Pre-sales, solutions engineering, or technical account management — I want to be in the room translating between what a client needs and what an engineering team can actually ship. Based in Curitiba, Brazil. Open to remote work.
     </p>
     <div class="contact-links">
       <a href="https://linkedin.com/in/rogeriocbianchini" target="_blank" class="contact-link">LinkedIn ↗</a>
-      <a href="https://github.com/rbtech-mobi?tab=repositories" target="_blank" class="contact-link">GitHub ↗</a>
+      <a href="https://github.com/rbtech-mobi" target="_blank" class="contact-link">GitHub ↗</a>
       <a href="mailto:rbianchini@alunos.utfpr.edu.br" class="contact-link">Email ↗</a>
     </div>
   </div>
@@ -789,21 +1052,19 @@
 </footer>
 
 <script>
-  // Last updated date
   const d = new Date();
   document.getElementById('last-updated').textContent =
     'Live · updated ' + d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
 
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        setTimeout(() => e.target.classList.add('visible'), i * 50);
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.07 });
+  }, { threshold: 0.06 });
   reveals.forEach(el => io.observe(el));
 </script>
 
