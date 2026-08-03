@@ -1,623 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Technical portfolio of Rogério Bianchini. Selected software, automation and IoT projects, with architecture notes and applied technology stacks." />
-<title>Rogério Bianchini | Technical Portfolio</title>
-<style>
-  :root {
-    --page: #f5f7f6;
-    --paper: #ffffff;
-    --ink: #172126;
-    --muted: #5c6a70;
-    --line: #d9e0df;
-    --accent: #135f63;
-    --accent-soft: #e8f2f1;
-    --code: #eef2f2;
-    --max: 1180px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rogério Bianchini · Pre-sales and Solutions Consulting</title>
+  <meta name="description" content="Consultative B2B sales with hands-on technical work. Pre-sales, solutions consulting and sales engineering portfolio." />
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--page);
-    color: var(--ink);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; }
-  code, .mono {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  }
-  .skip-link {
-    position: absolute;
-    left: 1rem;
-    top: -4rem;
-    background: var(--ink);
-    color: white;
-    padding: .7rem 1rem;
-    z-index: 999;
-  }
-  .skip-link:focus { top: 1rem; }
-  :focus-visible { outline: 3px solid #70bfc1; outline-offset: 3px; }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid rgba(23,33,38,.12);
-    background: rgba(245,247,246,.94);
-    backdrop-filter: blur(12px);
-  }
-  .nav {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: .9rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-  }
-  .brand {
-    text-decoration: none;
-    font-weight: 760;
-    letter-spacing: -.02em;
-  }
-  .nav ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.35rem;
-    list-style: none;
-  }
-  .nav a {
-    text-decoration: none;
-    font-size: .9rem;
-  }
-  .nav ul a { color: var(--muted); }
-  .nav ul a:hover { color: var(--ink); }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            background: '#FBFAF7',
+            surface: '#F5F3EE',
+            'surface-container-lowest': '#FFFFFF',
+            'surface-container': '#EEEBE4',
+            'surface-container-high': '#E5E1D8',
+            'on-surface': '#1F1D1A',
+            'on-surface-variant': '#5C5952',
+            'outline-variant': '#D6D2C8',
+            primary: '#1F3A2E',
+            'on-primary': '#FFFFFF',
+            'tertiary-container': '#1F3A2E',
+            'on-tertiary': '#FFFFFF',
+            'on-tertiary-container': '#CFE0D6',
+          },
+          fontSize: {
+            'display-lg': ['64px', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+            'display-lg-mobile': ['40px', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+            'headline-lg': ['32px', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+            'headline-md': ['22px', { lineHeight: '1.3' }],
+            'body-lg': ['18px', { lineHeight: '1.6' }],
+            'body-md': ['15px', { lineHeight: '1.6' }],
+            'label-caps': ['12px', { lineHeight: '1.4', letterSpacing: '0.08em' }],
+          },
+          fontWeight: {
+            'display-lg': '700',
+            'display-lg-mobile': '700',
+            'headline-lg': '600',
+            'headline-md': '600',
+            'body-lg': '400',
+            'body-md': '400',
+            'label-caps': '600',
+          },
+          spacing: {
+            'section-padding': '96px',
+            'margin-mobile': '24px',
+            'gutter': '24px',
+          },
+          maxWidth: {
+            'container-max': '1200px',
+          },
+        }
+      }
+    }
+  </script>
 
-  .hero {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 5.5rem 1.5rem 3.5rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(250px, .6fr);
-    gap: 3rem;
-    align-items: end;
-  }
-  .kicker {
-    margin: 0 0 1rem;
-    color: var(--accent);
-    font-size: .78rem;
-    font-weight: 760;
-    letter-spacing: .11em;
-    text-transform: uppercase;
-  }
-  h1, h2, h3 { line-height: 1.12; }
-  h1 {
-    max-width: 830px;
-    margin: 0;
-    font-size: clamp(2.6rem, 7vw, 5.8rem);
-    letter-spacing: -.055em;
-    font-weight: 790;
-  }
-  .hero-copy {
-    max-width: 760px;
-    margin: 1.5rem 0 0;
-    color: var(--muted);
-    font-size: clamp(1.04rem, 1.7vw, 1.22rem);
-  }
-  .hero-side {
-    border-left: 1px solid var(--line);
-    padding-left: 1.4rem;
-  }
-  .hero-side p {
-    margin: 0 0 .8rem;
-    color: var(--muted);
-    font-size: .92rem;
-  }
-  .hero-links { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.3rem; }
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: .68rem 1rem;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--paper);
-    text-decoration: none;
-    font-size: .9rem;
-    font-weight: 700;
-  }
-  .button.primary { background: var(--accent); color: white; border-color: var(--accent); }
-  .button:hover { transform: translateY(-1px); }
-
-  main { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem 5rem; }
-  .section {
-    padding: 4.5rem 0;
-    border-top: 1px solid var(--line);
-  }
-  .section-head {
-    display: grid;
-    grid-template-columns: minmax(180px, .42fr) minmax(0, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-  .section-index {
-    color: var(--accent);
-    font-size: .76rem;
-    font-weight: 760;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-  }
-  .section h2 {
-    margin: 0;
-    font-size: clamp(2rem, 4vw, 3.3rem);
-    letter-spacing: -.035em;
-  }
-  .section-intro {
-    max-width: 720px;
-    margin: .9rem 0 0;
-    color: var(--muted);
-  }
-
-  .project-list { display: grid; gap: 1.2rem; }
-  .project {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .project summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 1.6rem;
-  }
-  .project summary::-webkit-details-marker { display: none; }
-  .project[open] summary { border-bottom: 1px solid var(--line); }
-  .project-top {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.5rem;
-    align-items: start;
-  }
-  .project-type {
-    margin: 0 0 .45rem;
-    color: var(--accent);
-    font-size: .75rem;
-    font-weight: 760;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-  .project h3 {
-    margin: 0;
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    letter-spacing: -.025em;
-  }
-  .project-summary {
-    max-width: 780px;
-    margin: .75rem 0 0;
-    color: var(--muted);
-  }
-  .open-label {
-    color: var(--muted);
-    font-size: .8rem;
-    white-space: nowrap;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: .35rem .7rem;
-  }
-  .project[open] .open-label { color: var(--accent); background: var(--accent-soft); }
-  .facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .55rem;
-    margin-top: 1rem;
-  }
-  .fact {
-    padding: .35rem .65rem;
-    border-radius: 999px;
-    background: var(--code);
-    color: #3f5056;
-    font-size: .78rem;
-    font-family: "SFMono-Regular", Consolas, monospace;
-  }
-  .project-body {
-    padding: 1.7rem;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1.2rem;
-  }
-  .project-block {
-    grid-column: span 6;
-    padding: 1.1rem;
-    background: #fafcfc;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-  }
-  .project-block.wide { grid-column: 1 / -1; }
-  .project-block h4 {
-    margin: 0 0 .55rem;
-    font-size: .84rem;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .project-block p { margin: 0; color: var(--muted); }
-  .project-block ul { margin: .4rem 0 0; padding-left: 1.1rem; color: var(--muted); }
-  .project-block li + li { margin-top: .45rem; }
-  .flow {
-    display: grid;
-    gap: .55rem;
-  }
-  .flow-row {
-    display: grid;
-    grid-template-columns: 135px minmax(0, 1fr);
-    gap: 1rem;
-    padding: .7rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .flow-row:last-child { border-bottom: 0; }
-  .flow-row strong { font-size: .88rem; }
-  .flow-row span { color: var(--muted); font-size: .9rem; }
-
-  .stack-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  .stack-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 1.25rem;
-  }
-  .stack-card h3 { margin: 0 0 .75rem; font-size: 1rem; }
-  .tag-list { display: flex; flex-wrap: wrap; gap: .45rem; }
-  .tag {
-    padding: .34rem .58rem;
-    border-radius: 7px;
-    background: var(--code);
-    color: #3f5056;
-    font-size: .77rem;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
-    gap: 2rem;
-  }
-  .about-copy {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 1.6rem;
-  }
-  .about-copy p { margin: 0; color: var(--muted); }
-  .about-copy p + p { margin-top: 1rem; }
-  .evidence {
-    display: grid;
-    gap: .75rem;
-  }
-  .evidence-item {
-    background: var(--ink);
-    color: white;
-    border-radius: 14px;
-    padding: 1.1rem 1.2rem;
-  }
-  .evidence-item strong {
-    display: block;
-    font-size: 1.35rem;
-    letter-spacing: -.02em;
-  }
-  .evidence-item span { color: #c6d0d4; font-size: .86rem; }
-  .timeline { margin-top: 1.2rem; border-top: 1px solid var(--line); }
-  .timeline-row {
-    display: grid;
-    grid-template-columns: 155px minmax(0, 1fr);
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .timeline-row time { color: var(--muted); font-size: .85rem; }
-  .timeline-row strong { display: block; }
-  .timeline-row span { color: var(--muted); font-size: .9rem; }
-
-  .contact {
-    background: var(--accent);
-    color: white;
-    border-radius: 18px;
-    padding: clamp(1.5rem, 5vw, 3rem);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2rem;
-    align-items: end;
-  }
-  .contact h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); }
-  .contact p { max-width: 700px; margin: .8rem 0 0; color: #d6eeee; }
-  .contact .button { background: white; color: var(--accent); border-color: white; }
-
-  footer {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 1.5rem 2.5rem;
-    color: var(--muted);
-    font-size: .8rem;
-  }
-
-  @media (max-width: 850px) {
-    .hero, .section-head, .about-grid, .contact { grid-template-columns: 1fr; }
-    .hero-side { border-left: 0; border-top: 1px solid var(--line); padding: 1.2rem 0 0; }
-    .stack-grid { grid-template-columns: 1fr 1fr; }
-    .project-block { grid-column: 1 / -1; }
-  }
-  @media (max-width: 620px) {
-    .nav ul li:nth-child(2), .nav ul li:nth-child(3) { display: none; }
-    .hero { padding-top: 3.7rem; }
-    .project-top { grid-template-columns: 1fr; }
-    .open-label { justify-self: start; }
-    .stack-grid { grid-template-columns: 1fr; }
-    .flow-row, .timeline-row { grid-template-columns: 1fr; gap: .25rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; }
-  }
-</style>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+    }
+    details[open] summary .toggle-badge {
+      background-color: #1F3A2E;
+      color: #FFFFFF;
+      border-color: #1F3A2E;
+    }
+  </style>
 </head>
-<body>
-<a class="skip-link" href="#content">Skip to content</a>
-<header class="site-header">
-  <nav class="nav" aria-label="Main navigation">
-    <a class="brand" href="#top">Rogério Bianchini</a>
-    <ul>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+<body class="antialiased w-full overflow-x-hidden pt-20 bg-background text-on-surface">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-section-padding h-20 bg-surface-container-lowest border-b border-outline-variant">
+    <div class="flex items-center gap-4">
+      <a href="#top" class="text-headline-md font-headline-md font-bold text-primary">RB</a>
+    </div>
+
+    <div class="hidden md:flex gap-gutter items-center">
+      <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-primary transition-colors" href="#projects">Projects</a>
+      <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-primary transition-colors" href="#stack">Stack</a>
+      <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-primary transition-colors" href="#about">About</a>
+      <a class="text-on-surface-variant text-label-caps font-label-caps hover:text-primary transition-colors" href="#contact">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="https://github.com/rbtech-mobi" target="_blank" rel="noreferrer"
+         class="hidden sm:inline-flex bg-surface-container-lowest text-primary text-label-caps font-label-caps px-5 py-3 rounded border border-outline-variant hover:bg-surface-container-high transition-all">
+        GitHub
+      </a>
+      <a href="#contact" class="bg-primary text-on-primary text-label-caps font-label-caps px-6 py-3 rounded hover:opacity-90 transition-opacity">Contact</a>
+    </div>
   </nav>
-</header>
 
-<div id="top" class="hero">
-  <div>
-    <p class="kicker">Pre sales · Solution consulting · Software projects</p>
-    <h1>Selected systems and technical work.</h1>
-    <p class="hero-copy">I work with B2B SaaS, technical discovery and solution design. This portfolio documents systems I have built, the problem each one addresses, and the main decisions behind the implementation.</p>
-    <div class="hero-links">
-      <a class="button primary" href="#projects">View projects</a>
-      <a class="button" href="https://github.com/rbtech-mobi" target="_blank" rel="noreferrer">GitHub</a>
-      <a class="button" href="https://linkedin.com/in/rogeriocbianchini" target="_blank" rel="noreferrer">LinkedIn</a>
-    </div>
-  </div>
-  <aside class="hero-side" aria-label="Profile summary">
-    <p><strong>Based in:</strong> Curitiba, Brazil</p>
-    <p><strong>Current focus:</strong> Pre sales, solutions engineering and technical account work</p>
-    <p><strong>Languages:</strong> Portuguese, English and Spanish</p>
-  </aside>
-</div>
-
-<main id="content">
-  <section id="projects" class="section">
-    <div class="section-head">
-      <div class="section-index">01 · Projects</div>
-      <div>
-        <h2>Work first. Profile second.</h2>
-        <p class="section-intro">The projects are ordered by the type of problem they solve. Each case shows the operational need, the system design, the stack and the decisions that matter in production.</p>
+  <!-- Hero -->
+  <section id="top" class="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-gutter items-center min-h-[760px]">
+    <div class="col-span-1 md:col-span-7 flex flex-col gap-6 items-start">
+      <p class="text-label-caps font-label-caps text-on-surface-variant uppercase">Pre-sales · Solutions consulting · B2B SaaS</p>
+      <h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-primary max-w-4xl">
+        Consultative B2B sales, with hands-on technical work behind every conversation.
+      </h1>
+      <p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">
+        I sell, discover and design solutions in B2B SaaS. I also build the software, automations and infrastructure that let me understand what I am selling. This portfolio shows both sides: commercial results with real numbers, and technical projects with real code.
+      </p>
+      <div class="flex flex-col sm:flex-row flex-wrap gap-4 mt-4 w-full sm:w-auto">
+        <a href="#projects" class="inline-flex items-center justify-center text-label-caps font-label-caps px-8 py-4 rounded text-center transition-all border bg-primary text-on-primary border-primary hover:opacity-90">View Projects</a>
+        <a href="https://github.com/rbtech-mobi" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center text-label-caps font-label-caps px-8 py-4 rounded text-center transition-all border bg-surface-container-lowest text-primary border-primary hover:bg-surface-container-high">GitHub</a>
+        <a href="https://linkedin.com/in/rogeriocbianchini" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center text-label-caps font-label-caps px-8 py-4 rounded text-center transition-all border bg-surface-container-lowest text-primary border-primary hover:bg-surface-container-high">LinkedIn</a>
       </div>
     </div>
 
-    <div class="project-list">
-      <details class="project" open>
-        <summary>
-          <div class="project-top">
-            <div>
-              <p class="project-type">SaaS backend and PWA</p>
-              <h3>Multi Tenant Ordering Platform</h3>
-              <p class="project-summary">A reusable ordering and operations platform for independent food businesses. Each tenant has its own catalog, orders, users, branding and payment records. Access is scoped on the server for every protected request.</p>
-              <div class="facts">
-                <span class="fact">11 database tables</span>
-                <span class="fact">13 automated tests</span>
-                <span class="fact">Node.js and MySQL</span>
-                <span class="fact">Firebase authentication</span>
+    <aside class="col-span-1 md:col-span-5 bg-surface-container-lowest border border-outline-variant rounded p-8 shadow-sm">
+      <div class="flex flex-col gap-6">
+        <div>
+          <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Based in</p>
+          <p class="text-headline-md font-headline-md text-primary">Curitiba, Brazil</p>
+        </div>
+        <div class="border-t border-outline-variant pt-6">
+          <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Focus</p>
+          <p class="text-body-md font-body-md text-on-surface">Pre-sales, solutions consulting, sales engineering and technical account management in B2B SaaS.</p>
+        </div>
+        <div class="border-t border-outline-variant pt-6">
+          <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Languages</p>
+          <p class="text-body-md font-body-md text-on-surface">Portuguese (native), English (C1), Spanish (B2).</p>
+        </div>
+        <div class="border-t border-outline-variant pt-6">
+          <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Background</p>
+          <p class="text-body-md font-body-md text-on-surface">15 years in consultative sales. The last 4 in B2B SaaS and LegalTech, focused on discovery, demos, PoCs and handover to implementation.</p>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto w-full border-t border-outline-variant">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
+      <div class="col-span-1 md:col-span-4">
+        <p class="text-label-caps font-label-caps text-on-surface-variant uppercase">01 · Projects</p>
+      </div>
+      <div class="col-span-1 md:col-span-8">
+        <h2 class="text-headline-lg font-headline-lg text-primary max-w-3xl">Three projects, three angles a pre-sales role has to cover.</h2>
+        <p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl mt-4">
+          A backend that has to protect tenant data. A sales tool that fits an existing SDR workflow. An embedded device that talks to an automation server. Each one is documented with the problem, the decisions and the stack, in the same format I would use in a technical discovery.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6">
+
+      <!-- Project 1 -->
+      <details class="group bg-surface-container-lowest border border-outline-variant rounded overflow-hidden shadow-sm" open>
+        <summary class="cursor-pointer p-6 md:p-8 list-none">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div class="md:col-span-10">
+              <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-3">SaaS backend and PWA</p>
+              <h3 class="text-headline-lg font-headline-lg text-primary">Multi Tenant Ordering Platform</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant max-w-4xl mt-4">
+                An ordering and operations platform where multiple independent food businesses share the same deployment. Each tenant has isolated catalog, orders, users, branding and payment records. Tenant scoping is enforced on the server for every protected request, not on the client.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">11 database tables</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">13 automated tests</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Node.js</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">MySQL</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Firebase Auth</span>
               </div>
             </div>
-            <span class="open-label">Technical notes</span>
-          </div>
-        </summary>
-        <div class="project-body">
-          <div class="project-block">
-            <h4>Problem</h4>
-            <p>A shared platform reduces deployment and maintenance work, but it creates a strict requirement: one business must never read or change another business's data.</p>
-          </div>
-          <div class="project-block">
-            <h4>What I built</h4>
-            <p>A public catalog, cart and order flow for customers, plus an installable admin PWA for menus, order states, payments and branding.</p>
-          </div>
-          <div class="project-block wide">
-            <h4>Request flow</h4>
-            <div class="flow">
-              <div class="flow-row"><strong>Express</strong><span>Request ID, security headers, rate limits and body limits.</span></div>
-              <div class="flow-row"><strong>Identity</strong><span>Firebase verifies the ID token and adds the authenticated user to the request.</span></div>
-              <div class="flow-row"><strong>Tenant context</strong><span>An admin user lookup resolves the business ID before protected data is queried.</span></div>
-              <div class="flow-row"><strong>Service layer</strong><span>Order rules, state transitions, transactions and payment ledger logic.</span></div>
-              <div class="flow-row"><strong>Repository</strong><span>Parameterized SQL with business ID scoping on tenant owned records.</span></div>
+            <div class="md:col-span-2 flex md:justify-end">
+              <span class="toggle-badge text-label-caps font-label-caps border border-outline-variant rounded px-4 py-3 text-on-surface-variant transition-all">Technical Notes</span>
             </div>
           </div>
-          <div class="project-block">
-            <h4>Key decisions</h4>
-            <ul>
-              <li>Money is stored as integer cents.</li>
-              <li>Payments use an append only ledger.</li>
-              <li>Order creation supports idempotency.</li>
-              <li>Uploaded images are decoded and rewritten before storage.</li>
-            </ul>
-          </div>
-          <div class="project-block">
-            <h4>Stack</h4>
-            <p>Node.js, Express 5, MySQL, Firebase Auth, Zod, Sharp, Helmet, PWA, Service Worker, vanilla JavaScript, node:test and Supertest.</p>
+        </summary>
+        <div class="border-t border-outline-variant p-6 md:p-8 bg-surface">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Problem</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                Sharing infrastructure across tenants reduces cost and maintenance, but introduces a hard constraint: one business must never read, list or modify another business's data. Getting this wrong is not a bug, it is a data breach.
+              </p>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">What I built</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                A public catalog, cart and order flow for end customers, and an installable admin PWA where each business manages its menu, order states, payments and branding.
+              </p>
+            </div>
+            <div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-5">Request flow</h4>
+              <div class="grid gap-0 border border-outline-variant rounded overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Express</strong>
+                  <span class="p-4 text-on-surface-variant">Request ID, security headers, rate limits and body size limits before any handler runs.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Identity</strong>
+                  <span class="p-4 text-on-surface-variant">Firebase verifies the ID token and attaches the authenticated user to the request.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Tenant context</strong>
+                  <span class="p-4 text-on-surface-variant">An admin user lookup resolves the business ID server-side, before any tenant-owned data is queried.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Service layer</strong>
+                  <span class="p-4 text-on-surface-variant">Order rules, allowed state transitions, database transactions and payment ledger logic.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr]">
+                  <strong class="p-4 bg-surface-container text-primary">Repository</strong>
+                  <span class="p-4 text-on-surface-variant">Parameterized SQL queries scoped by business ID on every tenant-owned table.</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Key decisions</h4>
+              <ul class="text-body-md font-body-md text-on-surface-variant list-disc pl-5 space-y-2">
+                <li>Money stored as integer cents to avoid floating point rounding.</li>
+                <li>Payments modeled as an append-only ledger, not as a mutable balance.</li>
+                <li>Order creation accepts an idempotency key to prevent duplicates on retry.</li>
+                <li>Uploaded images are decoded and rewritten by the server before storage.</li>
+              </ul>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Stack</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                Node.js, Express 5, MySQL, Firebase Auth, Zod, Sharp, Helmet, PWA with Service Worker, vanilla JavaScript on the client, node:test and Supertest.
+              </p>
+            </div>
           </div>
         </div>
       </details>
 
-      <details class="project">
-        <summary>
-          <div class="project-top">
-            <div>
-              <p class="project-type">Sales workflow and LLM integration</p>
-              <h3>Outreach Calibrator</h3>
-              <p class="project-summary">A prospecting assistant that combines CRM fields and research notes to produce a more relevant first message. It is designed to fit inside an SDR workflow rather than operate as a separate writing tool.</p>
-              <div class="facts">
-                <span class="fact">monday.com webhooks</span>
-                <span class="fact">LLM integration</span>
-                <span class="fact">Structured prompts</span>
-                <span class="fact">Workflow automation</span>
+      <!-- Project 2 -->
+      <details class="group bg-surface-container-lowest border border-outline-variant rounded overflow-hidden shadow-sm">
+        <summary class="cursor-pointer p-6 md:p-8 list-none">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div class="md:col-span-10">
+              <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-3">Sales workflow and LLM integration</p>
+              <h3 class="text-headline-lg font-headline-lg text-primary">Outreach Calibrator</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant max-w-4xl mt-4">
+                A prospecting assistant that combines CRM fields and free-text research into a structured LLM request, producing a first-message draft that a sales rep reviews and sends. Built to sit inside an SDR workflow, not to replace the rep.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">monday.com webhooks</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">LLM integration</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Structured prompts</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Workflow automation</span>
               </div>
             </div>
-            <span class="open-label">Technical notes</span>
-          </div>
-        </summary>
-        <div class="project-body">
-          <div class="project-block">
-            <h4>Problem</h4>
-            <p>Personalized outreach requires research. High volume outreach often removes that context and produces messages that sound generic.</p>
-          </div>
-          <div class="project-block">
-            <h4>What I built</h4>
-            <p>A small application that receives prospect data from monday.com or manual entry, combines it with free text research, and sends a structured request to an LLM.</p>
-          </div>
-          <div class="project-block wide">
-            <h4>Workflow</h4>
-            <div class="flow">
-              <div class="flow-row"><strong>Input</strong><span>Prospect, role, company, website, offer and research notes.</span></div>
-              <div class="flow-row"><strong>Ingestion</strong><span>monday.com webhook or native automation, with manual entry as a fallback.</span></div>
-              <div class="flow-row"><strong>Analysis</strong><span>The prompt maps the prospect context to the seller's value proposition.</span></div>
-              <div class="flow-row"><strong>Output</strong><span>A suggested approach angle and a first message that the representative can review and edit.</span></div>
+            <div class="md:col-span-2 flex md:justify-end">
+              <span class="toggle-badge text-label-caps font-label-caps border border-outline-variant rounded px-4 py-3 text-on-surface-variant transition-all">Technical Notes</span>
             </div>
           </div>
-          <div class="project-block">
-            <h4>Why it is useful</h4>
-            <p>The application reduces the time needed to turn account research into an outreach draft while keeping the representative responsible for the final message.</p>
-          </div>
-          <div class="project-block">
-            <h4>Stack</h4>
-            <p>LLM integration, monday.com webhooks, structured JSON payloads, workflow automation and prompt design.</p>
+        </summary>
+        <div class="border-t border-outline-variant p-6 md:p-8 bg-surface">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Problem</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                Personalized outreach requires research. High-volume outreach usually skips that research and produces generic messages. The gap is not writing skill, it is context.
+              </p>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">What I built</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                A small application that receives prospect data from a monday.com webhook or from manual entry, merges it with research notes, and sends a structured payload to an LLM. The output is a suggested angle and a first-message draft.
+              </p>
+            </div>
+            <div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-5">Workflow</h4>
+              <div class="grid gap-0 border border-outline-variant rounded overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Input</strong>
+                  <span class="p-4 text-on-surface-variant">Prospect name, role, company, website, offer and research notes.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Ingestion</strong>
+                  <span class="p-4 text-on-surface-variant">monday.com webhook or native automation, with manual entry as a fallback path.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Analysis</strong>
+                  <span class="p-4 text-on-surface-variant">The prompt maps prospect context to the seller's value proposition and constrains the output format.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr]">
+                  <strong class="p-4 bg-surface-container text-primary">Output</strong>
+                  <span class="p-4 text-on-surface-variant">One suggested approach angle and one first-message draft. The rep reviews, edits and sends.</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Design choices</h4>
+              <ul class="text-body-md font-body-md text-on-surface-variant list-disc pl-5 space-y-2">
+                <li>The rep remains responsible for the final message. The tool does not send automatically.</li>
+                <li>Prompts are structured and versioned, not free-form.</li>
+                <li>The workflow runs inside monday.com so it fits the existing SDR routine.</li>
+                <li>Research notes are a required input, to avoid generic output.</li>
+              </ul>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Stack</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                LLM integration, monday.com webhooks, structured JSON payloads, workflow automation and prompt design.
+              </p>
+            </div>
           </div>
         </div>
       </details>
 
-      <details class="project">
-        <summary>
-          <div class="project-top">
-            <div>
-              <p class="project-type">Embedded device and MQTT workflow</p>
-              <h3>Desktop Workflow Terminal</h3>
-              <p class="project-summary">A touchscreen device for time sensitive approvals. It receives a workflow message over encrypted MQTT, displays the request, and publishes the selected response back to the automation server.</p>
-              <div class="facts">
-                <span class="fact">ESP32 S3</span>
-                <span class="fact">C++ and FreeRTOS</span>
-                <span class="fact">MQTT over TLS</span>
-                <span class="fact">n8n orchestration</span>
+      <!-- Project 3 -->
+      <details class="group bg-surface-container-lowest border border-outline-variant rounded overflow-hidden shadow-sm">
+        <summary class="cursor-pointer p-6 md:p-8 list-none">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div class="md:col-span-10">
+              <p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-3">Embedded device and MQTT workflow</p>
+              <h3 class="text-headline-lg font-headline-lg text-primary">Desktop Workflow Terminal</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant max-w-4xl mt-4">
+                A touchscreen device for time-sensitive approvals. It receives a workflow message over encrypted MQTT, shows the request on a dedicated screen, and publishes the selected response back to the automation server.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">ESP32 S3</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">C++</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">FreeRTOS</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">MQTT over TLS</span>
+                <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">n8n</span>
               </div>
             </div>
-            <span class="open-label">Technical notes</span>
-          </div>
-        </summary>
-        <div class="project-body">
-          <div class="project-block">
-            <h4>Problem</h4>
-            <p>Some approvals are easy to miss in busy chat channels and inboxes. A dedicated device makes the request visible and gives the operator a direct response path.</p>
-          </div>
-          <div class="project-block">
-            <h4>What I built</h4>
-            <p>Firmware for a WT32 SC01 Plus with a 3.5 inch touch display, dual WiFi failover, MQTT messaging, device health status and a simple response interface.</p>
-          </div>
-          <div class="project-block wide">
-            <h4>Device flow</h4>
-            <div class="flow">
-              <div class="flow-row"><strong>Connectivity</strong><span>Primary and secondary WiFi networks with automatic recovery.</span></div>
-              <div class="flow-row"><strong>Messaging</strong><span>HiveMQ Cloud over TLS, with QoS 1 for incoming and outgoing messages.</span></div>
-              <div class="flow-row"><strong>Interface</strong><span>Touch input through I2C and display rendering with LovyanGFX.</span></div>
-              <div class="flow-row"><strong>Workflow</strong><span>n8n publishes requests and consumes the selected response.</span></div>
-              <div class="flow-row"><strong>Health</strong><span>A retained status topic reports device availability on a fixed interval.</span></div>
+            <div class="md:col-span-2 flex md:justify-end">
+              <span class="toggle-badge text-label-caps font-label-caps border border-outline-variant rounded px-4 py-3 text-on-surface-variant transition-all">Technical Notes</span>
             </div>
           </div>
-          <div class="project-block">
-            <h4>Technical scope</h4>
-            <p>The project covers embedded state management, encrypted messaging, reconnection logic, touch input and a physical interface for a software workflow.</p>
-          </div>
-          <div class="project-block">
-            <h4>Stack</h4>
-            <p>ESP32 S3, C++, FreeRTOS, MQTT, TLS, LovyanGFX, ArduinoJson, HiveMQ Cloud and n8n.</p>
+        </summary>
+        <div class="border-t border-outline-variant p-6 md:p-8 bg-surface">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Problem</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                Approval requests sent through chat and email get missed. A dedicated physical device makes the request visible and gives the operator a direct, single-purpose response path.
+              </p>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">What I built</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                Firmware for a WT32 SC01 Plus with a 3.5 inch touch display, dual WiFi failover, MQTT messaging, retained health status and a simple response interface.
+              </p>
+            </div>
+            <div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-5">Device flow</h4>
+              <div class="grid gap-0 border border-outline-variant rounded overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Connectivity</strong>
+                  <span class="p-4 text-on-surface-variant">Primary and secondary WiFi networks with automatic recovery on failure.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Messaging</strong>
+                  <span class="p-4 text-on-surface-variant">HiveMQ Cloud over TLS, QoS 1 for incoming and outgoing messages.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Interface</strong>
+                  <span class="p-4 text-on-surface-variant">Touch input over I2C and display rendering with LovyanGFX.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] border-b border-outline-variant">
+                  <strong class="p-4 bg-surface-container text-primary">Workflow</strong>
+                  <span class="p-4 text-on-surface-variant">n8n publishes requests to the device and consumes the selected response.</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-[180px_1fr]">
+                  <strong class="p-4 bg-surface-container text-primary">Health</strong>
+                  <span class="p-4 text-on-surface-variant">A retained status topic reports device availability at a fixed interval.</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Technical scope</h4>
+              <ul class="text-body-md font-body-md text-on-surface-variant list-disc pl-5 space-y-2">
+                <li>State managed on-device, not on the server.</li>
+                <li>Encrypted MQTT with credentials stored outside the firmware.</li>
+                <li>Reconnection logic covers both WiFi and broker.</li>
+                <li>Physical interface intentionally minimal, one screen, one decision.</li>
+              </ul>
+            </div>
+            <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+              <h4 class="text-label-caps font-label-caps text-primary uppercase mb-3">Stack</h4>
+              <p class="text-body-md font-body-md text-on-surface-variant">
+                ESP32 S3, C++, FreeRTOS, MQTT, TLS, LovyanGFX, ArduinoJson, HiveMQ Cloud and n8n.
+              </p>
+            </div>
           </div>
         </div>
       </details>
+
     </div>
   </section>
 
-  <section id="stack" class="section">
-    <div class="section-head">
-      <div class="section-index">02 · Stack</div>
-      <div>
-        <h2>Tools grouped by use.</h2>
-        <p class="section-intro">The stack is separated by application so it is clear where each technology fits.</p>
+  <!-- Stack -->
+  <section id="stack" class="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto w-full border-t border-outline-variant bg-surface-container-lowest">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
+      <div class="col-span-1 md:col-span-4">
+        <p class="text-label-caps font-label-caps text-on-surface-variant uppercase">02 · Stack</p>
+      </div>
+      <div class="col-span-1 md:col-span-8">
+        <h2 class="text-headline-lg font-headline-lg text-primary max-w-3xl">Technical and commercial stack by area of use.</h2>
+        <p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl mt-4">
+          Tools I actually use across projects, integrations, customer conversations and solution design. Nothing is listed here that I have not touched in real work.
+        </p>
       </div>
     </div>
-    <div class="stack-grid">
-      <article class="stack-card"><h3>Backend and data</h3><div class="tag-list"><span class="tag">Node.js</span><span class="tag">Express 5</span><span class="tag">MySQL</span><span class="tag">REST APIs</span><span class="tag">Zod</span><span class="tag">Python ETL</span></div></article>
-      <article class="stack-card"><h3>Frontend and mobile</h3><div class="tag-list"><span class="tag">Vanilla JavaScript</span><span class="tag">PWA</span><span class="tag">Service Worker</span><span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">Android</span></div></article>
-      <article class="stack-card"><h3>Authentication and security</h3><div class="tag-list"><span class="tag">Firebase Auth</span><span class="tag">OAuth 2.0</span><span class="tag">Helmet</span><span class="tag">TLS</span><span class="tag">OPNsense</span><span class="tag">VLANs</span></div></article>
-      <article class="stack-card"><h3>Automation and AI</h3><div class="tag-list"><span class="tag">n8n</span><span class="tag">monday.com webhooks</span><span class="tag">LLM integration</span><span class="tag">Ollama</span><span class="tag">Structured JSON</span><span class="tag">GitHub Actions</span></div></article>
-      <article class="stack-card"><h3>Embedded and IoT</h3><div class="tag-list"><span class="tag">ESP32 S3</span><span class="tag">C++</span><span class="tag">FreeRTOS</span><span class="tag">MQTT</span><span class="tag">Raspberry Pi</span><span class="tag">BLE</span></div></article>
-      <article class="stack-card"><h3>Infrastructure and tools</h3><div class="tag-list"><span class="tag">Docker</span><span class="tag">Proxmox</span><span class="tag">Linux</span><span class="tag">GitHub</span><span class="tag">Salesforce</span><span class="tag">HubSpot</span></div></article>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="bg-surface border border-outline-variant rounded p-6">
+        <h3 class="text-headline-md font-headline-md text-primary mb-4">Backend and data</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Node.js</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Express 5</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">MySQL</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">REST APIs</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Zod</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Python ETL</span>
+        </div>
+      </article>
+      <article class="bg-surface border border-outline-variant rounded p-6">
+        <h3 class="text-headline-md font-headline-md text-primary mb-4">Frontend and mobile</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Vanilla JavaScript</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">PWA</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Service Worker</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Kotlin</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Java</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Android</span>
+        </div>
+      </article>
+      <article class="bg-surface border border-outline-variant rounded p-6">
+        <h3 class="text-headline-md font-headline-md text-primary mb-4">Authentication and security</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Firebase Auth</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">OAuth 2.0</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Helmet</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">TLS</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">OPNsense</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">VLANs</span>
+        </div>
+      </article>
+      <article class="bg-surface border border-outline-variant rounded p-6">
+        <h3 class="text-headline-md font-headline-md text-primary mb-4">Automation and AI</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">n8n</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">monday.com</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">LLM integration</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Ollama</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Structured JSON</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">GitHub Actions</span>
+        </div>
+      </article>
+      <article class="bg-surface border border-outline-variant rounded p-6">
+        <h3 class="text-headline-md font-headline-md text-primary mb-4">Embedded and IoT</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">ESP32 S3</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">C++</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">FreeRTOS</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">MQTT</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Raspberry Pi</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">BLE</span>
+        </div>
+      </article>
+      <article class="bg-surface border border-outline-variant rounded p-6">
+        <h3 class="text-headline-md font-headline-md text-primary mb-4">Sales stack and methodology</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Salesforce</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">HubSpot</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">monday CRM</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">Pipedrive</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">MEDDPICC</span>
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-2 rounded text-on-surface-variant">SPIN</span>
+        </div>
+      </article>
     </div>
   </section>
 
-  <section id="about" class="section">
-    <div class="section-head">
-      <div class="section-index">03 · About</div>
-      <div>
-        <h2>Commercial experience with technical depth.</h2>
-        <p class="section-intro">The career context comes after the work because the projects are the main evidence on this page.</p>
+  <!-- About -->
+  <section id="about" class="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto w-full border-t border-outline-variant">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
+      <div class="col-span-1 md:col-span-4">
+        <p class="text-label-caps font-label-caps text-on-surface-variant uppercase">03 · About</p>
+      </div>
+      <div class="col-span-1 md:col-span-8">
+        <h2 class="text-headline-lg font-headline-lg text-primary max-w-3xl">A closer who learned to build what he sells.</h2>
+        <p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl mt-4">
+          My background is consultative sales. I spent 11 years selling high-ticket custom projects, then moved into B2B SaaS. In the last 4 years I have been closing LegalTech deals, running discovery, delivering demos, supporting PoCs and handing over implementations. In parallel, I write code, run infrastructure and build integrations, because talking to engineering teams and technical buyers requires more than vocabulary.
+        </p>
       </div>
     </div>
-    <div class="about-grid">
-      <div class="about-copy">
-        <p>I started in consultative sales and moved into B2B SaaS in 2021 while studying systems development. My current work sits between customers and technical teams: discovery, product demonstrations, requirements, APIs, integrations, data migration and solution design.</p>
-        <p>I build software and infrastructure projects to improve the quality of technical conversations with buyers, product teams and engineers. The goal is practical understanding: how a system behaves, where it can fail, what it costs to change, and what should be explained before a customer commits.</p>
-        <div class="timeline" aria-label="Recent career history">
-          <div class="timeline-row"><time>May 2024 to present</time><div><strong>Green River ETL</strong><span>B2B sales, technical account management, pre sales and solution work.</span></div></div>
-          <div class="timeline-row"><time>Feb to Nov 2025</time><div><strong>Preâmbulo Tech</strong><span>Senior Closer for LegalTech SaaS.</span></div></div>
-          <div class="timeline-row"><time>Oct 2021 to May 2024</time><div><strong>Projuris</strong><span>Inside Sales Closer, discovery, demonstrations, proof of concept support and closing.</span></div></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <div class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded p-6 md:p-8">
+        <div class="text-body-md font-body-md text-on-surface-variant flex flex-col gap-4">
+          <p>I sit between the customer and the technical team. In practice, that means running discovery to separate declared needs from real constraints, translating those constraints into functional and non-functional requirements, and pushing back when a request does not fit the product or the timeline.</p>
+          <p>I have carried a quota, missed it, exceeded it, defended forecasts and lost deals I should have won. That is the part of the job that keeps me honest when I design solutions. A demo that ignores procurement, security review or implementation capacity is not a demo, it is a slide deck.</p>
+          <p>The technical projects on this portfolio exist because I refuse to explain systems I cannot build a small version of. Multi-tenant isolation, LLM prompt design, MQTT over TLS and idempotent order creation are not abstract concepts in my head, they are things I have implemented and debugged.</p>
+        </div>
+
+        <div class="mt-10 border-t border-outline-variant">
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 py-5 border-b border-outline-variant">
+            <time class="text-label-caps font-label-caps text-on-surface-variant uppercase">May 2024 to present</time>
+            <div>
+              <h3 class="text-headline-md font-headline-md text-primary">Green River ETL</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant mt-1">B2B SaaS consulting and technical account work. Discovery, solution design, API integrations, ETL and workflow automation. Support to go-to-market conversations across Brazil, the United States and Colombia.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 py-5 border-b border-outline-variant">
+            <time class="text-label-caps font-label-caps text-on-surface-variant uppercase">Feb 2025 to Nov 2025</time>
+            <div>
+              <h3 class="text-headline-md font-headline-md text-primary">Preâmbulo Tech</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant mt-1">Account Executive for LegalTech SaaS. Final-stage enterprise deals, executive demonstrations, requirements validation and handover to implementation.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 py-5 border-b border-outline-variant">
+            <time class="text-label-caps font-label-caps text-on-surface-variant uppercase">Oct 2021 to May 2024</time>
+            <div>
+              <h3 class="text-headline-md font-headline-md text-primary">Projuris</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant mt-1">Account Executive for LegalTech SaaS. Full consultative cycle from qualified opportunity to signed contract. 188% of annual target and Top MRR Award 2022.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 py-5">
+            <time class="text-label-caps font-label-caps text-on-surface-variant uppercase">Feb 2010 to Feb 2021</time>
+            <div>
+              <h3 class="text-headline-md font-headline-md text-primary">High-End Custom Furniture</h3>
+              <p class="text-body-md font-body-md text-on-surface-variant mt-1">Consultative sales of high-ticket custom projects. Technical design in Promob, on-site validation, negotiation and delivery coordination with architects, suppliers and installation teams.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <aside class="evidence" aria-label="Commercial results">
-        <div class="evidence-item"><strong>188%+</strong><span>Quota attainment at Projuris, with the Top MRR award.</span></div>
-        <div class="evidence-item"><strong>R$700K</strong><span>Approximate renewals completed during a 40 day advisory engagement.</span></div>
-        <div class="evidence-item"><strong>3 markets</strong><span>GTM support across Brazil, Colombia and the United States.</span></div>
+
+      <aside class="lg:col-span-4 flex flex-col gap-4">
+        <div class="bg-tertiary-container text-on-tertiary rounded p-6">
+          <strong class="block text-headline-lg font-headline-lg text-on-tertiary">188%</strong>
+          <span class="text-body-md font-body-md text-on-tertiary-container">Annual sales target achievement at Projuris, with the Top MRR Award in 2022.</span>
+        </div>
+        <div class="bg-tertiary-container text-on-tertiary rounded p-6">
+          <strong class="block text-headline-lg font-headline-lg text-on-tertiary">Largest MRR</strong>
+          <span class="text-body-md font-body-md text-on-tertiary-container">Closed the largest individual MRR contract of the year, above 12x the team monthly average.</span>
+        </div>
+        <div class="bg-tertiary-container text-on-tertiary rounded p-6">
+          <strong class="block text-headline-lg font-headline-lg text-on-tertiary">R\$700K</strong>
+          <span class="text-body-md font-body-md text-on-tertiary-container">Renewals managed in a 40-day specialized consulting engagement.</span>
+        </div>
+        <div class="bg-tertiary-container text-on-tertiary rounded p-6">
+          <strong class="block text-headline-lg font-headline-lg text-on-tertiary">3 markets</strong>
+          <span class="text-body-md font-body-md text-on-tertiary-container">Commercial and technical conversations across Brazil, Colombia and the United States, in Portuguese, English and Spanish.</span>
+        </div>
       </aside>
     </div>
   </section>
 
-  <section id="contact" class="section">
-    <div class="contact">
-      <div>
-        <h2>Contact</h2>
-        <p>Open to remote roles in pre sales, solutions engineering, technical account management and customer facing technical consulting.</p>
+  <!-- Education -->
+  <section id="education" class="py-section-padding px-margin-mobile md:px-section-padding max-w-container-max mx-auto w-full border-t border-outline-variant bg-surface-container-lowest">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
+      <div class="col-span-1 md:col-span-4">
+        <p class="text-label-caps font-label-caps text-on-surface-variant uppercase">04 · Education</p>
       </div>
-      <div class="hero-links">
-        <a class="button" href="mailto:rogeriocbianchini@gmail.com">Email</a>
-        <a class="button" href="https://github.com/rbtech-mobi" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="button" href="https://linkedin.com/in/rogeriocbianchini" target="_blank" rel="noreferrer">LinkedIn</a>
+      <div class="col-span-1 md:col-span-8">
+        <h2 class="text-headline-lg font-headline-lg text-primary max-w-3xl">Formal training and certifications.</h2>
+        <p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl mt-4">
+          Formal education is in software. Certifications are split between sales methodology and product platforms I use in the field.
+        </p>
       </div>
     </div>
-  </section>
-</main>
-<footer>Rogério Bianchini · Curitiba, Brazil</footer>
-</body>
-</html>
+
+    <div
